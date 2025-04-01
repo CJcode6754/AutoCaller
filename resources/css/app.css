@@ -25,17 +25,52 @@
     .scrollbar-hidden::-webkit-scrollbar {
         display: none;
     }
-    .nav-design{
+
+    .nav-design {
         @apply text-[#050B20] font-medium hover:text-blue-600 transition duration-100;
     }
-    .add-new-car{
+    
+    .add-new-car {
         @apply text-[#050B20] border-2 border-orange-500 py-2 px-4 rounded-full hover:bg-orange-500 hover:text-white transition duration-150;
     }
-    .signup{
+    
+    .signup {
         @apply text-white border-2 bg-orange-500 py-2 px-4 rounded-full hover:bg-orange-600 transition duration-150;
     }
-    .login{
+    
+    .login {
         @apply text-orange-500 py-2 px-4 rounded-full border-2 border-transparent hover:border-orange-500 transition duration-150;
+    }
+    
+    /* Tablet view icon buttons */
+    .icon-btn {
+        @apply p-2 rounded-full hover:text-white transition duration-150;
+    }
+    
+    .add-icon {
+        @apply border-2 border-orange-500 hover:bg-orange-500 hover:text-white;
+    }
+    
+    .signup-icon {
+        @apply bg-orange-500 hover:bg-orange-600;
+    }
+    
+    .login-icon {
+        @apply border-2 border-transparent hover:border-orange-500;
+    }
+    
+    /* Mobile buttons */
+    .mobile-btn {
+        @apply py-3 px-4 text-center w-full rounded-lg border border-orange-300 text-[#050B20] font-medium hover:bg-gray-200 transition duration-150;
+    }
+
+    /* Fixed mobile menu - covers the entire screen */
+    #mobile-menu {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    #mobile-menu.hidden {
+        display: none;
     }
     .car-type{
         @apply border border-gray-300 px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer hover:bg-gray-200 transition duration-150;
@@ -66,5 +101,44 @@
 
     .card-scrollbar{
         @apply flex sm:grid sm:grid-cols-2 lg:grid-cols-3 overflow-auto sm:overflow-visible whitespace-nowrap px-2 sm:px-0 gap-4 sm:gap-12 md:gap-4 lg:gap-4;
+    }
+
+    .car-featured {
+        @apply text-[#050B20] font-semibold text-base relative transition duration-150;
+    }
+
+    .car-featured::before {
+        @apply content-[''] absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 scale-x-0 transition-transform duration-150;
+    }
+
+    .car-featured:hover::before {
+        @apply scale-x-100;
+    }
+    
+    .featured-card{
+        @apply w-80 border border-gray-200 hover:border-gray-300 rounded-lg shadow-lg flex flex-col items-center gap-4;
+    }
+
+    .featured-card-image {
+        @apply w-5/6 h-52 object-contain rounded-t-lg;
+    }
+    .bookmark-icon {
+        @apply absolute top-3 right-4 text-[#050B20] bg-orange-400 py-2 px-3.5 rounded-full hover:text-white transition duration-150;
+    }
+
+    .pagination-focus{
+       @apply border border-blue-400 bg-blue-500 text-white font-medium rounded-full py-2 px-4 cursor-pointer transition duration-150;
+    }
+
+    .pagination{
+        @apply border border-gray-400 text-gray-600 hover:bg-gray-200 rounded-full py-2 px-4 cursor-pointer transition duration-150;
+    }
+
+    .btn-search{
+        @apply flex items-center bg-[#405FF2] hover:bg-blue-800 text-white text-xs lg:text-base font-medium py-2 px-6 rounded-lg cursor-pointer gap-2 transition duration-150;
+    }
+
+    .carType{
+        @apply text-white text-sm py-3 px-4 text-center rounded-xl border border-gray-400 inset-shadow-xs hover:border-gray-600 cursor-pointer transition duration-150;
     }
 }

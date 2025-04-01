@@ -1,6 +1,18 @@
 import './bootstrap';
 
-document.getElementById('menu-toggle').addEventListener('click', function() {
+// JavaScript for the mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeMenu = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenu.classList.toggle('hidden');
+    
+    menuToggle.addEventListener('click', function() {
+        mobileMenu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+    });
+    
+    closeMenu.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+        document.body.style.overflow = ''; // Re-enable scrolling
+    });
 });
