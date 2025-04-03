@@ -11,20 +11,20 @@
                     Available</h1>
                 <div class="mt-6 flex justify-center lg:justify-start gap-2">
                     <button
-                        class="text-white font-semibold bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-lg shadow-md flex items-center gap-2 transition-all">
+                        class="text-white font-semibold bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-lg shadow-md cursor-pointer flex items-center gap-2 transition-all">
                         View Inventory <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
                     <button
-                        class="text-sm lg:text-lg border border-gray-700 text-gray-900 hover:bg-gray-100 font-semibold  py-3 px-6 rounded-md items-center transition-all">Contact
+                        class="text-sm lg:text-lg border border-gray-700 text-gray-900 cursor-pointer hover:bg-gray-100 font-semibold  py-3 px-6 rounded-md items-center transition-all">Contact
                         Us <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
                 </div>
 
                 <h3 class="text-medium font-semibold mt-8">or Browse Featured Model</h3>
                 <ul class="flex justify-center lg:justify-start gap-3 mt-3 flex-wrap">
-                    <li class="car-type"><i class="fa-solid fa-car-side"></i><a href="#">SUV</a></li>
-                    <li class="car-type"><i class="fa-solid fa-car-side"></i><a href="#">Sedan</a></li>
-                    <li class="car-type"><i class="fa-solid fa-car-side"></i><a href="#">Hatchback</a></li>
-                    <li class="car-type"><i class="fa-solid fa-car-side"></i><a href="#">Coupe</a></li>
-                    <li class="car-type"><i class="fa-solid fa-car-side"></i><a href="#">Electric</a></li>
+                    <li class="car-type"><img src="{{asset('assets/icons/SUV.svg')}}" alt="Icons"><a href="#">SUV</a></li>
+                    <li class="car-type"><img src="{{asset('assets/icons/Sedan.svg')}}" alt="Icons"><a href="#">Sedan</a></li>
+                    <li class="car-type"><img src="{{asset('assets/icons/Hatchback.svg')}}" alt="Icons"><a href="#">Hatchback</a></li>
+                    <li class="car-type"><img src="{{asset('assets/icons/Coupe.svg')}}" alt="Icons"><a href="#">Coupe</a></li>
+                    <li class="car-type"><img src="{{asset('assets/icons/Electric.svg')}}" alt="Icons"><a href="#">Electric</a></li>
                 </ul>
             </div>
             <div class="lg:w-1/2 lg:flex hidden justify-end items-center">
@@ -38,7 +38,7 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row lg:flex-row items-center justify-between">
             <h1 class="text-xl lg:text-4xl font-semibold">Explore Our Premium Brands</h1>
             <p class="flex justify-center items-center font-light gap-2">Show all Brands <span><img
-                        src="{{ asset('assets/upArrow.svg') }}" alt="Arrow"></p>
+                        src="{{ asset('assets/icons/upArrow.svg') }}" alt="Arrow"></p>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 py-8">
@@ -71,9 +71,9 @@
         </div>
     </section>
 
-    {{-- Our Services Section --}}
+    {{-- New Cars Section --}}
     <section class="py-12 px-12 md:px-24">
-        <h1 class="text-3xl md:text-4xl font-semibold mb-8">Our Services</h1>
+        <h1 class="text-3xl md:text-4xl font-semibold mb-8">New Cars</h1>
         <div class="card-scrollbar scrollbar-hidden">
             <div class="service-card">
                 <img class="service-card-image" src="{{ asset('assets/cars/Bmw.png') }}" alt="BMW Car">
@@ -119,7 +119,7 @@
                         roadside</li>
                 </ul>
                 <div class="flex justify-center md:justify-start mt-4">
-                    <button class="text-white bg-blue-500 rounded-lg hover:bg-blue-600 py-3 px-4 w-40">Get started <i
+                    <button class="text-white bg-blue-500 rounded-lg hover:bg-blue-600 py-3 px-4 w-40 cursor-pointer">Get started <i
                             class="fa-solid fa-arrow-up-right-from-square"></i></button>
                 </div>
             </div>
@@ -138,7 +138,7 @@
             <div class="max-w-7xl mx-auto flex flex-row items-center justify-between">
                 <h1 class="text-xl lg:text-4xl font-semibold">Featured Listings</h1>
                 <p class="flex justify-center items-center font-light gap-2">Show all Brands <span><img
-                            src="{{ asset('assets/upArrow.svg') }}" alt="Arrow"></span></p>
+                            src="{{ asset('assets/icons/upArrow.svg') }}" alt="Arrow"></span></p>
             </div>
 
             <ul class="mt-4 lg:ml-4 flex justify-center md:justify-start items-center gap-4 flex-wrap">
@@ -166,15 +166,15 @@
 
                             <div class="flex justify-between items-center gap-12 mt-2">
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                     <span>1000 km</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                     <span>Petrol</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                    <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                     <span>CVT</span>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
                                 <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                                 <div class="flex justify-center items-center gap-1">
                                     <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                    <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}"
+                                    <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}"
                                         alt="Arrow Icon">
                                 </div>
                             </div>
@@ -204,15 +204,15 @@
 
                             <div class="flex justify-between items-center gap-12 mt-2">
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                     <span>1000 km</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                     <span>Petrol</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                    <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                     <span>CVT</span>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@
                                 <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                                 <div class="flex justify-center items-center gap-1">
                                     <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                    <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}"
+                                    <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}"
                                         alt="Arrow Icon">
                                 </div>
                             </div>
@@ -242,15 +242,15 @@
 
                             <div class="flex justify-between items-center gap-12 mt-2">
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                     <span>1000 km</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                     <span>Petrol</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                    <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                     <span>CVT</span>
                                 </div>
                             </div>
@@ -259,7 +259,7 @@
                                 <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                                 <div class="flex justify-center items-center gap-1">
                                     <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                    <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}"
+                                    <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}"
                                         alt="Arrow Icon">
                                 </div>
                             </div>
@@ -275,15 +275,15 @@
                             </div>
                             <div class="flex justify-between items-center gap-12 mt-2">
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                     <span>1000 km</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                    <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                     <span>Petrol</span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2">
-                                    <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                    <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                     <span>CVT</span>
                                 </div>
                             </div>
@@ -292,7 +292,7 @@
                                 <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                                 <div class="flex justify-center items-center gap-1">
                                     <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                    <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}"
+                                    <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}"
                                         alt="Arrow Icon">
                                 </div>
                             </div>
@@ -316,15 +316,15 @@
 
                         <div class="flex justify-between items-center gap-12 mt-2">
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                 <span>1000 km</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                 <span>Petrol</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                 <span>CVT</span>
                             </div>
                         </div>
@@ -333,7 +333,7 @@
                             <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                             <div class="flex justify-center items-center gap-1">
                                 <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}" alt="Arrow Icon">
+                                <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}" alt="Arrow Icon">
                             </div>
                         </div>
                     </div>
@@ -353,15 +353,15 @@
 
                         <div class="flex justify-between items-center gap-12 mt-2">
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                 <span>1000 km</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                 <span>Petrol</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                 <span>CVT</span>
                             </div>
                         </div>
@@ -370,7 +370,7 @@
                             <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                             <div class="flex justify-center items-center gap-1">
                                 <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}" alt="Arrow Icon">
+                                <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}" alt="Arrow Icon">
                             </div>
                         </div>
                     </div>
@@ -390,15 +390,15 @@
 
                         <div class="flex justify-between items-center gap-12 mt-2">
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                 <span>1000 km</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                 <span>Petrol</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                 <span>CVT</span>
                             </div>
                         </div>
@@ -407,7 +407,7 @@
                             <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                             <div class="flex justify-center items-center gap-1">
                                 <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}" alt="Arrow Icon">
+                                <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}" alt="Arrow Icon">
                             </div>
                         </div>
                     </div>
@@ -428,15 +428,15 @@
 
                         <div class="flex justify-between items-center gap-12 mt-2">
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Distance.svg') }}" alt="Distance Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
                                 <span>1000 km</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/Gas.svg') }}" alt="Gas Icon">
+                                <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
                                 <span>Petrol</span>
                             </div>
                             <div class="flex flex-col justify-center items-center gap-2">
-                                <img class="size-6" src="{{ asset('assets/typeOfCar.svg') }}" alt="Type of Car">
+                                <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
                                 <span>CVT</span>
                             </div>
                         </div>
@@ -445,7 +445,7 @@
                             <h3 class="text-[#050B20] font-medium text-lg">$15,000</h3>
                             <div class="flex justify-center items-center gap-1">
                                 <h3 class="text-blue-600 font-medium"><a href="#">View Details</a></h3>
-                                <img class="text-blue-600" src="{{ asset('assets/blueArrow.svg') }}" alt="Arrow Icon">
+                                <img class="text-blue-600" src="{{ asset('assets/icons/blueArrow.svg') }}" alt="Arrow Icon">
                             </div>
                         </div>
                     </div>
@@ -477,7 +477,7 @@
     <section class="bg-[#050B20] mx-8 lg:mx-24 rounded-2xl drop-shadow-md">
         <div class="flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-24 py-12 px-12 lg:px-24">
             <div class="flex flex-row items-center gap-8">
-                <img class="size-12 lg:size-20" src="{{ asset('assets/searchIcon.svg') }}" alt="Search Icon">
+                <img class="size-12 lg:size-20" src="{{ asset('assets/icons/searchIcon.svg') }}" alt="Search Icon">
                 <div>
                     <h1 class="text-xl lg:text-3xl font-semibold text-white mb-2">Search over 150,000 vehicles</h1>
                     <p class="text-white text-xs font-light">Choose from thousands of trusted used cars and vans across the
@@ -486,9 +486,9 @@
                 </div>
             </div>
             <div class="flex flex-row items-center gap-4">
-                <button class="btn-search">Search Cars <img class="mt-1" src="{{ asset('assets/arrowWhite.svg') }}"
+                <button class="btn-search">Search Cars <img class="mt-1" src="{{ asset('assets/icons/arrowWhite.svg') }}"
                         alt="Arrow"></button>
-                <button class="btn-search">Search Vans <img class="mt-1" src="{{ asset('assets/arrowWhite.svg') }}"
+                <button class="btn-search">Search Vans <img class="mt-1" src="{{ asset('assets/icons/arrowWhite.svg') }}"
                         alt="Arrow"></button>
             </div>
         </div>
@@ -506,33 +506,113 @@
         </div>
     </section>
 
-    <section class="py-12 px-12 md:px-24">
+    <section class="py-16 px-12 md:px-24">
         <h1 class="flex justify-center text-4xl font-semibold">Why Choose Us?</h1>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 ">
             <div>
-                <img src="{{asset('assets/priceTag.svg')}}" alt="Icon">
+                <img src="{{asset('assets/icons/priceTag.svg')}}" alt="Icon">
                 <h3 class="md:text-sm lg:text-lg font-semibold my-3">Special Financing Offers</h3>
-                <p class="text-sm leading-6">Our stress-free finance department <br> that can
+                <p class="text-sm leading-6 text-justify">Our stress-free finance department that can
                 find financial solutions to save you money.</p>
             </div>
             <div>
-                <img src="{{asset('assets/diamond.svg')}}" alt="Icon">
+                <img src="{{asset('assets/icons/diamond.svg')}}" alt="Icon">
                 <h3 class="md:text-sm lg:text-lg font-semibold my-3">Trusted Car Dealership</h3>
-                <p class="text-sm leading-6">Our stress-free finance department <br> that can
+                <p class="text-sm leading-6 text-justify">Our stress-free finance department that can
                     find financial solutions to save you money.</p>
             </div>
             <div>
-                <img src="{{asset('assets/tag.svg')}}" alt="Icon">
+                <img src="{{asset('assets/icons/tag.svg')}}" alt="Icon">
                 <h3 class="md:text-sm lg:text-lg font-semibold my-3">Transparent Pricing</h3>
-                <p class="text-sm leading-6">Our stress-free finance department <br> that can
+                <p class="text-sm leading-6 text-justify">Our stress-free finance department that can
                     find financial solutions to save you money.</p>
             </div>
             <div>
-                <img src="{{asset('assets/car.svg')}}" alt="Icon">
+                <img src="{{asset('assets/icons/car.svg')}}" alt="Icon">
                 <h3 class="md:text-sm lg:text-lg font-semibold my-3">Expert Car Service</h3>
-                <p class="text-sm leading-6">Our stress-free finance department <br> that can
+                <p class="text-sm leading-6 text-justify">Our stress-free finance department that can
                 find financial solutions to save you money.</p>
             </div>
         </div>
+    </section>
+
+    <section class="bg-gray-100 py-12 px-4 mx-8 md:px-8 lg:mx-24 rounded-xl drop-shadow-md">
+            <div class="flex flex-row items-center justify-between">
+                <h2 class="text-xl lg:text-3xl font-bold">What our costumers say</h2>
+                <p>Reviews</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-between mt-8 gap-4 lg:gap-8">
+                <div class="review-card p-8">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium">Great Work</h3>
+                        <img class="size-8" src="{{asset('assets/icons/double.svg')}}" alt="Icon">
+                    </div>
+                    <p class="py-8 text-sm font-mono text-justify">“Amazing design, easy to customize and a design
+                        quality superlative account on its cloud platform for
+                        the optimized performance. And we didn’t on our
+                        original designs.”</p>
+                    <div class="flex items-center gap-2">
+                        <img class="size-12 rounded-full" src="{{asset('assets/logo.jpg')}}" alt="">
+                        <div>
+                            <h3 class="font-medium text-base">Ceejay Ibabiosa</h3>
+                            <span class="text-sm font-light">Web Dev</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card p-8">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium">Great Work</h3>
+                        <img class="size-8" src"" src="{{asset('assets/icons/double.svg')}}" alt="Icon">
+                    </div>
+                    <p class="py-8 text-sm font-mono text-justify">“Amazing design, easy to customize and a design
+                        quality superlative account on its cloud platform for
+                        the optimized performance. And we didn’t on our
+                        original designs.”</p>
+                        <div class="flex items-center gap-2">
+                            <img class="size-12 rounded-full" src="{{asset('assets/logo.jpg')}}" alt="">
+                        <div>
+                            <h3 class="font-medium text-base">Ceejay Ibabiosa</h3>
+                            <span class="text-sm font-light">Web Dev</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card p-8">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium">Great Work</h3>
+                        <img class="size-8" src"" src="{{asset('assets/icons/double.svg')}}" alt="Icon">
+                    </div>
+                    <p class="py-8 text-sm font-mono text-justify">“Amazing design, easy to customize and a design
+                        quality superlative account on its cloud platform for
+                        the optimized performance. And we didn’t on our
+                        original designs.”</p>
+                    <div class="flex items-center gap-2">
+                        <img class="size-12 rounded-full" src="{{asset('assets/logo.jpg')}}" alt="">
+                        <div>
+                            <h3 class="font-medium text-base">Ceejay Ibabiosa</h3>
+                            <span class="text-sm font-light">Web Dev</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center items-center mt-8 gap-2">
+                <button class="pagination">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="pagination-focus">
+                    1
+                </button>
+                <button class="pagination">
+                    2
+                </button>
+                <button class="pagination">
+                    3
+                </button>
+                <!-- Next Button -->
+                <button class="pagination">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
     </section>
 @endsection
