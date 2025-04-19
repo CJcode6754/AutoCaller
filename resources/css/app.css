@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -22,6 +21,19 @@
     }
 }
 
+@layer utilities {
+
+    table {
+        @apply w-full;
+    }
+    th {
+        @apply bg-gray-100 rounded text-base font-medium py-2 text-center;
+    }
+
+    td {
+        @apply text-sm py-3 text-center;
+    }
+}
 @layer components{
     /* Hide scrollbar for Chrome, Safari, and Edge */
     ::-webkit-scrollbar {
@@ -128,22 +140,29 @@
     }
     
     .featured-card{
-        @apply w-80 border border-gray-200 hover:border-gray-300 rounded-lg shadow-lg flex flex-col items-center gap-4;
+        @apply w-70 h-110 border border-gray-200 hover:border-gray-300 rounded-lg shadow-lg flex flex-col items-center gap-4;
     }
 
     .featured-card-image {
-        @apply w-5/6 h-52 object-contain rounded-t-lg;
+        @apply w-5/6 h-32 object-contain rounded-t-lg;
     }
     .bookmark-icon {
-        @apply absolute top-3 right-4 text-[#050B20] bg-orange-400 py-2 px-3.5 rounded-full cursor-pointer hover:text-white transition duration-150;
+        @apply absolute top-3 right-4 text-gray-500 px-3.5 rounded-full cursor-pointer hover:text-gray-700 transition duration-150;
+    }
+    .bookmark-icon-red {
+        @apply absolute top-3 right-4 text-red-500 px-3.5 rounded-full cursor-pointer hover:text-red-700 transition duration-150;
     }
 
     .pagination-focus{
-       @apply border border-blue-400 bg-blue-500 text-white font-medium rounded-full py-2 px-4 cursor-pointer transition duration-150;
+       @apply border border-blue-400 bg-blue-500 text-white font-medium rounded-full py-2 px-4;
     }
 
     .pagination{
         @apply border border-gray-400 text-gray-600 hover:bg-gray-200 rounded-full py-2 px-4 cursor-pointer transition duration-150;
+    }
+
+    .pagination-disabled{
+        @apply border border-gray-400 text-gray-600 rounded-full py-2 px-4;
     }
 
     .btn-search{
@@ -157,4 +176,29 @@
     .review-card{
         @apply bg-white rounded-lg shadow-lg p-4;
     }
+
+    .label{
+        @apply text-base font-medium text-gray-500 py-2;
+    }
+
+    .show-scroll-image {
+        @apply w-40 h-30 border-2 border-transparent rounded-lg hover:border-blue-400 transition duration-150 bg-gray-50 shadow-sm;
+      }
+
+      /* Always show scrollbar + style */
+      .always-show-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 transparent;
+      }
+
+      .always-show-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .always-show-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 6px;
+      }
+
+
 }
