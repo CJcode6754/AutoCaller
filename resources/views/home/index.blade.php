@@ -75,15 +75,41 @@
             </div>
         </section>
 
-        {{-- New Cars Section --}}
-        <section class="py-12 px-12 md:px-24">
-            <h1 class="text-3xl md:text-4xl font-semibold mb-8">New Cars</h1>
-            <div class="card-scrollbar scrollbar-hidden">
-                <x-new-cars-card />
-                <x-new-cars-card />
-                <x-new-cars-card />
+        {{-- Featured Cars Section --}}
+        <section class="py-12 px-12 md:px-24 md:py-16">
+            <div>
+                <div class="max-w-7xl mx-auto flex flex-row items-center justify-between">
+                    <h1 class="text-xl lg:text-4xl font-semibold">Featured Listings</h1>
+                    <p class="flex justify-center items-center font-light gap-2">Show all Brands <span><img
+                                src="{{ asset('assets/icons/upArrow.svg') }}" alt="Arrow"></span></p>
+                </div>
+
+                <ul class="mt-4 lg:ml-4 flex justify-center md:justify-start items-center gap-4 flex-wrap">
+                    <li class="car-featured">In Stock</li>
+                    <li class="car-featured">New Cars</li>
+                    <li class="car-featured">Used Cars</li>
+                </ul>
+                <hr class="w-full mt-2 border border-gray-300 lg:ml-3">
+
+                <section class="mt-8">
+                    <div class="overflow-x-auto pb-4 md:hidden">
+                        <div class="flex gap-4 min-w-max">
+                            @foreach ($cars as $car)
+                                <x-mobile-featured-cars-card :$car/>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        @foreach ($cars as $car)
+                            <x-featured-cars-card :$car/>
+                        @endforeach
+                    </div>
+                    {{ $cars->onEachSide(1)->links() }}
+                </section>
             </div>
         </section>
+
 
         <section class="py-12 px-12 md:px-24 bg-gray-100">
             <div class="flex flex-col lg:flex-row">
@@ -125,41 +151,6 @@
                 <h3><span class="text-[30px] md:text-[45px] font-semibold">500M</span><br>DEALER REVIEWS</h3>
                 <h3><span class="text-[30px] md:text-[45px] font-semibold">50K</span><br>VISITORS PER WEEK</h3>
                 <h3><span class="text-[30px] md:text-[45px] font-semibold">20K</span><br>VERIFIED DEALERS</h3>
-            </div>
-        </section>
-
-        {{-- Featured Cars Section --}}
-        <section class="py-12 px-12 md:px-24 md:py-16">
-            <div>
-                <div class="max-w-7xl mx-auto flex flex-row items-center justify-between">
-                    <h1 class="text-xl lg:text-4xl font-semibold">Featured Listings</h1>
-                    <p class="flex justify-center items-center font-light gap-2">Show all Brands <span><img
-                                src="{{ asset('assets/icons/upArrow.svg') }}" alt="Arrow"></span></p>
-                </div>
-
-                <ul class="mt-4 lg:ml-4 flex justify-center md:justify-start items-center gap-4 flex-wrap">
-                    <li class="car-featured">In Stock</li>
-                    <li class="car-featured">New Cars</li>
-                    <li class="car-featured">Used Cars</li>
-                </ul>
-                <hr class="w-full mt-2 border border-gray-300 lg:ml-3">
-
-                <section class="mt-8">
-                    <div class="overflow-x-auto pb-4 md:hidden">
-                        <div class="flex gap-4 min-w-max">
-                            @foreach ($cars as $car)
-                            <x-mobile-featured-cars-card :$car/>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        @foreach ($cars as $car)
-                            <x-featured-cars-card :$car/>
-                        @endforeach
-                    </div>
-                    {{$cars->onEachSide(1)->links()}}
-                </section>
             </div>
         </section>
 

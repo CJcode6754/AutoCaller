@@ -9,21 +9,23 @@
         <a class="pagination" href="{{$paginator->previousPageUrl()}}"><i class="fa-solid fa-chevron-left"></i></a>
     @endif
 
-    @foreach ($elements as $element)
-        @if(is_string($element))
-            <span class="pagination">{{$element}}</span>
-        @endif
+    <ul class="hidden md:flex gap-2">
+        @foreach ($elements as $element)
+            @if(is_string($element))
+                <span class="pagination">{{$element}}</span>
+            @endif
 
-        @if(is_array($element))
-            @foreach ($element as $page => $url)
-                @if ($page == $paginator->currentPage())
-                    <span class="pagination-focus">{{$page}}</span>
-                @else
-                    <a class="pagination" href="{{$url}}">{{$page}}</a>
-                @endif
-            @endforeach
-        @endif
-    @endforeach
+            @if(is_array($element))
+                @foreach ($element as $page => $url)
+                    @if ($page == $paginator->currentPage())
+                        <span class="pagination-focus">{{$page}}</span>
+                    @else
+                        <a class="pagination" href="{{$url}}">{{$page}}</a>
+                    @endif
+                @endforeach
+            @endif
+        @endforeach
+    </ul>
 
     @if ($paginator->hasMorePages())
         <ul class="pagination">
