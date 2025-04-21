@@ -2,31 +2,29 @@
     <main>
         <section class="relative bg-white shadow-lg rounded-b-lg mx-4 md:mx-16 lg:mx-60 px-4 md:px-6 py-6">
             <h1 class="text-2xl font-medium text-gray-500 mb-4">Add new Car</h1>
-            <form action="">
+            <form action="" method="POST" enctype="multipart/form-data">
+                @csrf
                 {{-- Dropdown Section --}}
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
                     {{-- Maker --}}
                     <div>
                         <h2 class="label">Maker</h2>
-                        <x-dropdown>
-                            <x-slot:label>Maker</x-slot:label>
-                            <x-slot:options>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700">Toyota</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700">Nissan</a>
-                            </x-slot:options>
-                        </x-dropdown>
+                        <select id="makerDropdown" name="maker_id" class="border px-4 py-2 rounded w-full">
+                            <option value="">Select Maker</option>
+                            @foreach ($makers as $maker)
+                                <option value="{{ $maker->id }}">{{ $maker->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                     {{-- Model --}}
                     <div>
                         <h2 class="label">Model</h2>
-                        <x-dropdown>
-                            <x-slot:label>Model</x-slot:label>
-                            <x-slot:options>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700">Camry</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700">Altima</a>
-                            </x-slot:options>
-                        </x-dropdown>
+                        <select id="modelDropdown" name="model_id" class="border px-4 py-2 rounded w-full">
+                            <option value="">Select Model</option>
+                        </select>
                     </div>
+
                     {{-- Year --}}
                     <div>
                         <h2 class="label">Year</h2>
@@ -167,4 +165,25 @@
             </form>
         </section>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const makerDropdown = document.getElementById('makerDropdown');
+            const modelDropdown = document.getElementById('modelDropdown');
+
+            makerDropdown.addEventListener('change', function () {
+                const makerId = this.value;
+                modelDropdown.innerHTML = '<option value="">Loading...</option>';
+
+                fetch(`/get-models/${makerId}`)
+                    .then(res => res.json())
+                    .then(models => {
+                        modelDropdown.innerHTML = '<option value="">Select Model</option>';
+                        models.forEach(model => {
+                            modelDropdown.innerHTML += `<option value="${model.id}">${model.name}</option>`;
+                        });
+                    });
+            });
+        });
+    </script>
 </x-backend-layout>

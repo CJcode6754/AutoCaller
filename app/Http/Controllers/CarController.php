@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\City;
+use App\Models\Maker;
+use App\Models\Models;
+use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,7 +30,11 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view("cars.create");
+        $makers = Maker::all();
+        $models = Models::all();
+        $regions = Region::all();
+        $cities = City::all();
+        return view("cars.create", compact("makers", "models", "regions","cities"));
     }
 
     /**
@@ -34,7 +42,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -88,5 +96,11 @@ class CarController extends Controller
             ->with(['primaryImage', 'city', 'models', 'makers', 'carType', 'fuelType'])
             ->paginate(12);
         return view('cars.watchlist', compact('cars'));
+    }
+
+    public function getModels($makerId)
+    {
+        $models = Models::where('maker_id', $makerId)->get();
+        return response()->json($models);
     }
 }
