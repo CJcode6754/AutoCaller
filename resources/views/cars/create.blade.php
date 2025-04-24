@@ -55,7 +55,7 @@
 
                     <div class="w-full max-w-sm">
                         <label for="fuel_type" class="dropdown-label">Fuel Type</label>
-                        <select name="fuel_type" id="fuel_type" class="dropdown-select">
+                        <select name="fuel_type_id" id="fuel_type" class="dropdown-select">
                             <option value="">Select Fuel Type</option>
                             @foreach ($fuel_types as $fuel_type)
                                 <option value="{{$fuel_type->id}}">{{$fuel_type->name}}</option>
@@ -116,21 +116,21 @@
                 <section class="mt-6">
                     <h2 class="label">Accessories</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <label><input type="checkbox" name="car_accesories[]" value="Air Conditioning"> Air
+                        <label><input type="checkbox" name="air_conditioning" value="1"> Air
                             Conditioning</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="Power Windows"> Power Windows</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="GPS"> GPS Navigation</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="Power Door Locks"> Power Door
+                        <label><input type="checkbox" name="power_windows" value="1"> Power Windows</label>
+                        <label><input type="checkbox" name="gps" value="1"> GPS Navigation</label>
+                        <label><input type="checkbox" name="power_door_locks" value="1"> Power Door
                             Locks</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="Heated Seats"> Heated
+                        <label><input type="checkbox" name="heated_seats" value="1"> Heated
                             Seats</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="ABS"> ABS</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="Climate Control"> Climate
+                        <label><input type="checkbox" name="abs" value="1"> ABS</label>
+                        <label><input type="checkbox" name="climate_control" value="1"> Climate
                             Control</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="Cruise Control"> Cruise
+                        <label><input type="checkbox" name="cruise_control" value="1"> Cruise
                             Control</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="Bluetooth"> Bluetooth</label>
-                        <label><input type="checkbox" name="car_accesories[]" value="Leather Seats"> Leather
+                        <label><input type="checkbox" name="bluetooth" value="1"> Bluetooth</label>
+                        <label><input type="checkbox" name="leather_seats" value="1"> Leather
                             Seats</label>
                     </div>
                 </section>

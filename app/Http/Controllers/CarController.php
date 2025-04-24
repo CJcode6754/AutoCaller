@@ -19,11 +19,13 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = User::find(id: 1)
-            ->cars()
-            ->with(['primaryImage', 'models', 'makers'])
-            ->orderBy("created_at","desc")
-            ->paginate(15);
+        $userId = auth()->id();
+
+        $cars = Car::where('user_id', $userId)
+        ->with(['primaryImage', 'makers', 'models'])
+        ->orderBy("created_at","desc")
+        ->paginate(15);
+    
         return view("cars.index", compact("cars"));
     }
 
@@ -44,26 +46,69 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'maker_id' => ['required','exists:makers,id'],
             'model_id' => ['required','exists:models,id'],
             'year' => ['required','integer'],
             'car_type' => ['required','exists:car_types,id'],
-            'fuel_type' => ['required','exists:fuel_types,id'],
+            'fuel_type_id' => ['required','exists:fuel_types,id'],
             'region_id' => ['required','exists:regions,id'],
             'city_id' => ['required','exists:cities,id'],
             'price' => ['required','integer'],
             'vin' => ['required','integer'],
             'mileage' => ['required','integer'],
             'address' => ['required','string', 'max:255'],
-            'phone' => ['required', 'regex:/^09\d{9}$/', 'unique:users'],
-            'car_accesories.*' => ['nullable', 'string'],
+            'phone' => ['required', 'regex:/^09\d{9}$/'],
             'description' => ['nullable', 'string'],
             'publishDate' => ['required', 'date'],
-            'images.*' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,PNG', 'max:2048'],
         ]);
 
-        // dd($validated);
+        
+        $car = Car::create([
+            'maker_id' => $request->input('maker_id'),
+            'model_id' => $request->input('model_id'),
+            'year' => $request->input('year'),
+            'price' => $request->input('price'),
+            'vin' => $request->input('vin'),
+            'mileage' => $request->input('mileage'),
+            'car_type_id' => $request->input('car_type'),
+            'fuel_type_id' => $request->input('fuel_type_id'),
+            'user_id' => auth()->id(),
+            'city_id' => $request->input('city_id'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'description' => $request->input('description') ?? null,
+            'published_at' => $request->input('publishDate'),
+        ]);
+
+        $car->features()->create([
+            'air_conditioning' => $request->has('air_conditioning'),
+            'power_windows' => $request->has('power_windows'),
+            'gps' => $request->has('gps'),
+            'power_door_locks' => $request->has('power_door_locks'),
+            'heated_seats' => $request->has('heated_seats'),
+            'abs' => $request->has('abs'),
+            'climate_control' => $request->has('climate_control'),
+            'cruise_control' => $request->has('cruise_control'),
+            'bluetooth' => $request->has('bluetooth'),
+            'leather_seats' => $request->has('leather_seats'),
+        ]);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('car_images', 'public'); // Still stores in car_images/
+                $filename = basename($path); // This gives just the filename part
+        
+                $car->images()->create([
+                    'image_path' => $filename, // Now stores only the filename
+                    'position' => $index + 1,
+                ]);
+            }
+        }
+        
+
+        return redirect()->route('car.index')->with('success', 'Car added successfully!');
     }
 
     /**

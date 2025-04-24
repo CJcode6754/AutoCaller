@@ -1,6 +1,6 @@
 @props(['car', 'isfavorite' => false])
 <div class="featured-card relative">
-    <a href="{{route('car.show', $car->id)}}"><img class="featured-card-image" src="{{ $car->primaryImage->image_path }}" alt="Cars"></a>
+    <a href="{{route('car.show', $car->id)}}"><img class="featured-card-image" src="{{ asset('storage/car_images/' . $car->primaryImage->image_path) }}" alt="Cars"></a>
     <div @class(['hidden' => $isfavorite])>
         <span class="bookmark-icon"><i class="fa-solid fa-heart"></i></span>
     </div>
