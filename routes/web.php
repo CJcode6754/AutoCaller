@@ -24,4 +24,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('car', CarController::class);
 
     Route::get('/get-models/{maker}', [CarController::class, 'getModels']);
+    Route::get('/get-cities/{region}', [CarController::class, 'getCities']);
 });

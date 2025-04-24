@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\CarType;
 use App\Models\City;
+use App\Models\FuelType;
 use App\Models\Maker;
 use App\Models\Models;
 use App\Models\Region;
@@ -31,10 +33,10 @@ class CarController extends Controller
     public function create()
     {
         $makers = Maker::all();
-        $models = Models::all();
         $regions = Region::all();
-        $cities = City::all();
-        return view("cars.create", compact("makers", "models", "regions","cities"));
+        $car_types = CarType::all();
+        $fuel_types = FuelType::all();
+        return view("cars.create", compact("makers","regions", 'car_types', 'fuel_types'));
     }
 
     /**
@@ -42,7 +44,23 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $validated = $request->validate([
+            'maker_id' => ['required','exists:makers,id'],
+            'model_id' => ['required','exists:models,id'],
+            'year' => ['required','integer'],
+            'car_type' => ['required','exists:car_types,id'],
+            'fuel_type' => ['required','exists:fuel_types,id'],
+            'region_id' => ['required','exists:regions,id'],
+            'city_id' => ['required','exists:cities,id'],
+            'address' => ['required','string', 'max:255'],
+            'phone' => ['required', 'regex:/^09\d{9}$/', 'unique:users'],
+            'car_accesories.*' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'publishDate' => ['required', 'date'],
+            'images.*' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ]);
+
+        // dd($validated);
     }
 
     /**
@@ -102,5 +120,11 @@ class CarController extends Controller
     {
         $models = Models::where('maker_id', $makerId)->get();
         return response()->json($models);
+    }
+
+    public function getCities($regionId)
+    {
+        $cities = City::where('region_id', $regionId)->get();
+        return response()->json($cities);
     }
 }
