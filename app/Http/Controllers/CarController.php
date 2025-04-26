@@ -60,7 +60,7 @@ class CarController extends Controller
             'address' => ['required','string', 'max:255'],
             'phone' => ['required', 'regex:/^09\d{9}$/'],
             'description' => ['nullable', 'string'],
-            'publishDate' => ['required', 'date'],
+            'publishDate' => ['date'],
             'images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,PNG', 'max:2048'],
         ]);
 
@@ -75,6 +75,7 @@ class CarController extends Controller
             'car_type_id' => $request->input('car_type'),
             'fuel_type_id' => $request->input('fuel_type_id'),
             'user_id' => auth()->id(),
+            'region_id' => $request->input('region_id'),
             'city_id' => $request->input('city_id'),
             'address' => $request->input('address'),
             'phone' => $request->input('phone'),
@@ -85,14 +86,16 @@ class CarController extends Controller
         $car->features()->create([
             'air_conditioning' => $request->has('air_conditioning'),
             'power_windows' => $request->has('power_windows'),
-            'gps' => $request->has('gps'),
+            'gps_navigation' => $request->has('gps'),
             'power_door_locks' => $request->has('power_door_locks'),
-            'heated_seats' => $request->has('heated_seats'),
+            'heater_seats' => $request->has('heater_seats'),
             'abs' => $request->has('abs'),
             'climate_control' => $request->has('climate_control'),
             'cruise_control' => $request->has('cruise_control'),
-            'bluetooth' => $request->has('bluetooth'),
+            'bluetooth_connectivity' => $request->has('bluetooth'),
             'leather_seats' => $request->has('leather_seats'),
+            'remote_start' => $request->has('remote_start'),
+            'rear_parking_sensors' => $request->has('rear_parking_sensors')
         ]);
 
         if ($request->hasFile('images')) {
@@ -124,7 +127,11 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        return view("cars.edit");
+        $makers = Maker::all();
+        $regions = Region::all();
+        $car_types = CarType::all();
+        $fuel_types = FuelType::all();
+        return view("cars.edit", compact('car','makers','regions', 'car_types', 'fuel_types'));
     }
 
     /**
@@ -132,7 +139,80 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $request->validate([
+            'maker_id' => ['required','exists:makers,id'],
+            'model_id' => ['required','exists:models,id'],
+            'year' => ['required','integer'],
+            'car_type' => ['required','exists:car_types,id'],
+            'fuel_type_id' => ['required','exists:fuel_types,id'],
+            'region_id' => ['required','exists:regions,id'],
+            'city_id' => ['required','exists:cities,id'],
+            'price' => ['required','integer'],
+            'vin' => ['required','integer'],
+            'mileage' => ['required','integer'],
+            'address' => ['required','string', 'max:255'],
+            'phone' => ['required', 'regex:/^09\d{9}$/'],
+            'description' => ['nullable', 'string'],
+            'publishDate' => ['date'],
+            'images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,PNG', 'max:2048'],
+        ]);
+
+        
+        $car->update([
+            'maker_id' => $request->input('maker_id'),
+            'model_id' => $request->input('model_id'),
+            'year' => $request->input('year'),
+            'price' => $request->input('price'),
+            'vin' => $request->input('vin'),
+            'mileage' => $request->input('mileage'),
+            'car_type_id' => $request->input('car_type'),
+            'fuel_type_id' => $request->input('fuel_type_id'),
+            'user_id' => auth()->id(),
+            'region_id' => $request->input('region_id'),
+            'city_id' => $request->input('city_id'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'description' => $request->input('description') ?? null,
+            'published_at' => $request->input('publishDate'),
+        ]);
+
+        $car->features()->update([
+            'air_conditioning' => $request->has('air_conditioning'),
+            'power_windows' => $request->has('power_windows'),
+            'gps_navigation' => $request->has('gps'),
+            'power_door_locks' => $request->has('power_door_locks'),
+            'heater_seats' => $request->has('heater_seats'),
+            'abs' => $request->has('abs'),
+            'climate_control' => $request->has('climate_control'),
+            'cruise_control' => $request->has('cruise_control'),
+            'bluetooth_connectivity' => $request->has('bluetooth'),
+            'leather_seats' => $request->has('leather_seats'),
+            'remote_start' => $request->has('remote_start'),
+            'rear_parking_sensors' => $request->has('rear_parking_sensors')
+        ]);
+
+        if ($request->hasFile('images')) {
+            foreach ($car->images as $image) {
+                $oldPath = storage_path('app/public/car_images/' . $image->image_path);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+                $image->delete(); // remove from DB
+            }
+
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('car_images', 'public');
+                $filename = basename($path);
+        
+                $car->images()->create([
+                    'image_path' => $filename, // Now stores only the filename
+                    'position' => $index + 1,
+                ]);
+            }
+        }
+        
+
+        return redirect()->route('car.index')->with('success', 'Car updated successfully!');
     }
 
     /**
@@ -140,7 +220,9 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+
+        return redirect()->route('car.index')->with('success', 'Car deleted successfully');
     }
 
     public function search()

@@ -24,7 +24,7 @@
                 <div class="flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto gap-3 md:max-h-96">
                     @foreach ($car->images as $image)
                         <img class="w-24 h-24 object-contain border rounded cursor-pointer show-scroll-image"
-                            src="{{ asset('storage/car_images/' . $image->image_path) }}" data-image="{{ $image->image_path }}" alt="Thumbnail">
+                            src="{{ asset('storage/car_images/' . $image->image_path) }}" data-image="{{ asset('storage/car_images/' . $image->image_path) }}" alt="Thumbnail">
                     @endforeach
                 </div>
             </div>
