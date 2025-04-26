@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\FuelType;
 use App\Models\Maker;
 use App\Models\Models;
+use App\Models\Region;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -36,6 +37,7 @@ class CarFactory extends Factory
             'car_type_id' => CarType::inRandomOrder()->first()->id,
             'fuel_type_id' => FuelType::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
+            'region_id' => Region::inRandomOrder()->first()->id,
             'city_id' => City::inRandomOrder()->first()->id,
             'address' => fake()->address(),
             'phone' => function(array $attributes) {
