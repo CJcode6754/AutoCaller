@@ -9,15 +9,16 @@
     </div>
     <div class="mx-6">
         <div>
-            <h3 class="font-medium text-lg">{{$car->city->name}} - {{$car->year}} - {{$car->makers->name}} {{$car->models->name}}</h3>
+            <h3 class="font-medium text-lg">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>
         </div>
-        <p class="font-light text-medium">
-            {{Str::limit($car->description, 50)}}
-        </p>
+        <div class="flex justify-evenly items-center gap-4 pt-2">
+            <p class="font-medium text-sm">{{$car->region->name}}</p>
+            <p class="font-medium text-sm">{{$car->city->name}}</p>
+        </div>
         <hr class="w-full mt-2 border border-gray-200">
     </div>
 
-    <div class="flex justify-between items-center gap-12 mt-2">
+    <div class="flex justify-between items-center gap-4 mt-2">
         <div class="flex flex-col justify-center items-center gap-2">
             <img class="size-6" src="{{ asset('assets/icons/Distance.svg') }}" alt="Distance Icon">
             <span>{{$car->mileage}} km</span>
