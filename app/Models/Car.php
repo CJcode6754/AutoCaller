@@ -43,6 +43,11 @@ class Car extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
+    }
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);

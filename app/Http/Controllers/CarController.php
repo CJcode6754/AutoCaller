@@ -225,16 +225,89 @@ class CarController extends Controller
         return redirect()->route('car.index')->with('success', 'Car deleted successfully');
     }
 
-    public function search()
+    public function search(Request $request)
     {
-        $query = Car::where('published_at', '<', now())
-            ->with(['primaryImage', 'city', 'makers', 'models', 'fuelType', 'carType'])
-            ->orderBy('published_at','desc');
+        $cars = Car::all();
+        $makers = Maker::all();
+        $car_types = CarType::all();
+        $regions = Region::all();
+        $fuel_types = FuelType::all();
+        $makerID = $request->input('maker_id');
+        $modelID = $request->input('model_id');
+        $car_type = $request->input('car_type');
+        $fuel_type = $request->input('fuel_type');
+        $yearFrom = $request->input('yearFrom');
+        $yearTo = $request->input('yearTo');
+        $priceFrom = $request->input('priceFrom');
+        $priceTo = $request->input('priceTo');
+        $mileage = $request->input('mileage');
+        $regionID = $request->input('region_id');
+        $cityID = $request->input('city_id');
 
-        // $query->join('cities', 'cities.id',  '=', 'cars.city_id')
-        //     ->where('cities.region_id', 1);
-        $cars = $query->paginate(12);
-        return view("cars.search", ['cars' => $cars]);
+        $cars = $query = Car::where('published_at', '<', now())
+            ->with(['primaryImage', 'city', 'region','makers', 'models', 'fuelType', 'carType'])
+            ->when($makerID, function ($query) use ($makerID) {
+                return $query->where('maker_id', $makerID);
+            })
+            ->when($modelID, function($query) use ($modelID) {
+                return $query->where('model_id', $modelID);
+            })
+            ->when($car_type, function($query) use ($car_type) {
+                return $query->where('car_type_id', $car_type);
+            })
+            ->when($fuel_type, function($query) use ($fuel_type) {
+                return $query->where('fuel_type_id', $fuel_type);
+            })
+            ->when($yearFrom, function($query) use ($yearFrom){
+                return $query->where('year', '>=', $yearFrom);
+            })
+            ->when($yearTo, function($query) use ($yearTo){
+                return $query->where('year', '<=', $yearTo);
+            })
+            ->when($priceFrom, function($query) use ($priceFrom){
+                return $query->where('price', '>=', $priceFrom);
+            })
+            ->when($priceTo, function($query) use ($priceTo){
+                return $query->where('price', '<=', $priceTo);
+            })            
+            ->when($regionID, function($query) use ($regionID) {
+                return $query->where('region_id', $regionID);
+            })
+            ->when($cityID, function($query) use ($cityID) {
+                return $query->where('city_id', $cityID);
+            })
+            ->when($mileage, function ($query) use ($mileage) {
+                if ($mileage === 'any') {
+                    return $query;
+                } elseif ($mileage == 10000) {
+                    return $query->where('mileage', '<=', 10000);
+                } elseif ($mileage == 20000) {
+                    return $query->whereBetween('mileage', [10001, 20000]);
+                } elseif ($mileage == 30000) {
+                    return $query->whereBetween('mileage', [20001, 30000]);
+                } elseif ($mileage == 40000) {
+                    return $query->whereBetween('mileage', [30001, 40000]);
+                } elseif ($mileage == 50000) {
+                    return $query->whereBetween('mileage', [40001, 50000]);
+                } elseif ($mileage == 60000) {
+                    return $query->whereBetween('mileage', [50001, 60000]);
+                } elseif ($mileage == 70000) {
+                    return $query->whereBetween('mileage', [60001, 70000]);
+                } elseif ($mileage == 80000) {
+                    return $query->whereBetween('mileage', [70001, 80000]);
+                } elseif ($mileage == 90000) {
+                    return $query->whereBetween('mileage', [80001, 90000]);
+                } elseif ($mileage == 100000) {
+                    return $query->whereBetween('mileage', [90001, 100000]);
+                } elseif ($mileage == 100001) {
+                    return $query->where('mileage', '>=', 100001);
+                }
+            })            
+            ->orderBy('published_at','desc')
+            ->paginate(12)
+            ->appends($request->query());
+
+        return view("cars.search", compact('cars', 'makers', 'car_types', 'regions', 'fuel_types'));
     }
 
     public function watchlist()
