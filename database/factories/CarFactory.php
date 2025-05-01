@@ -34,6 +34,7 @@ class CarFactory extends Factory
             'price' => ((int)fake()->randomFloat(2, 5, 100)) * 10000,
             'vin' => strtoupper(Str::random(17)),
             'mileage' => ((int)fake()->randomFloat(2, 5, 500)) * 1000,
+            'inventory_type' => fake()->randomElement(['instock', 'used', 'new']),
             'car_type_id' => CarType::inRandomOrder()->first()->id,
             'fuel_type_id' => FuelType::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,

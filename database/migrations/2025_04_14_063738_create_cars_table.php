@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('maker_id')->constrained('makers');
-            $table->foreignId('model_id')->constrained('models');
+            $table->foreignId('maker_id')->constrained('makers')->cascadeOnDelete();
+            $table->foreignId('model_id')->constrained('models')->cascadeOnDelete();
             $table->integer('year');
             $table->integer('price');
             $table->string('vin', 255);
             $table->integer('mileage');
-            $table->foreignId('car_type_id')->constrained('car_types');
-            $table->foreignId('fuel_type_id')->constrained('fuel_types');
+            $table->enum('inventory_type', ['new', 'used', 'instock']);
+            $table->foreignId('car_type_id')->constrained('car_types')->cascadeOnDelete();
+            $table->foreignId('fuel_type_id')->constrained('fuel_types')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('region_id')->constrained('regions');
-            $table->foreignId('city_id')->constrained('cities');
+            $table->foreignId('region_id')->constrained('regions')->cascadeOnDelete();
+            $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
             $table->string('address', 255);
             $table->string('phone', 45);
             $table->longText('description')->nullable();

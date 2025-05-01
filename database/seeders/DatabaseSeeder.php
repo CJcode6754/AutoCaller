@@ -26,19 +26,15 @@ class DatabaseSeeder extends Seeder
 
         CarType::factory()->sequence(
                 ['name' => 'Sedan'],
-                ['name' => 'Hatchback'],
                 ['name' => 'SUV'],
                 ['name' => 'Crossover'],
                 ['name' => 'Coupe'],
-                ['name' => 'Convertible'],
-                ['name' => 'Wagon'],
-                ['name' => 'Pickup Truck'],
+                ['name' => 'Pickup'],
                 ['name' => 'Van'],
                 ['name' => 'Minivan'],
-                ['name' => 'Sports Car'],
                 ['name' => 'Jeep'],
         )
-        ->count(12)
+        ->count(8)
         ->create();
 
         FuelType::factory()->sequence(
@@ -162,9 +158,6 @@ class DatabaseSeeder extends Seeder
             'Audi' => ['A3', 'A4', 'A6', 'Q3', 'Q5', 'Q7'],
             'Subaru' => ['Forester', 'Impreza', 'XV', 'Outback', 'Legacy', 'BRZ'],
             'Tesla' => ['Model S', 'Model 3', 'Model X', 'Model Y', 'Cybertruck', 'Roadster'],
-            'Chery' => ['Tiggo 2', 'Tiggo 5x', 'Tiggo 7 Pro', 'Tiggo 8', 'QQ', 'Arrizo 5'],
-            'Geely' => ['Coolray', 'Okavango', 'Emgrand', 'Azkarra', 'GX3', 'Binray'],
-            'Foton' => ['Thunder', 'Toplander', 'Gratour', 'Toano', 'View Transvan', 'Harabas'],
         ];
 
         foreach ($carBrands as $carBrand => $models){
