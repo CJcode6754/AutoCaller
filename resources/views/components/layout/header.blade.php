@@ -5,13 +5,10 @@
             <div class="flex items-center space-x-4 lg:space-x-12">
                 <h2 class="text-2xl font-bold text-[#050B20]">Cars</h2>
                 <!-- Desktop Navigation -->
-                <ul class="hidden md:flex space-x-4 xl:space-x-8 pt-1">
-                    <li><a href="{{route('dashboard')}}" class="nav-design">Home</a></li>
-                    <li><a href="#" class="nav-design">Listings</a></li>
-                    <li><a href="#" class="nav-design">Blog</a></li>
-                    <li><a href="#" class="nav-design">About</a></li>
-                    <li><a href="#" class="nav-design">Contact</a></li>
-                </ul>
+                <x-nav-link href="{{route('dashboard')}}" :active="request()->is('/')">Home</x-nav-link>
+                <x-nav-link href="{{route('listings')}}" :active="request()->is('listings')">Listings</x-nav-link>
+                <x-nav-link href="{{route('brands')}}" :active="request()->is('brands')">Brands</x-nav-link>
+                <x-nav-link href="{{route('blog')}}" :active="request()->is('blog')">Blog</x-nav-link>
             </div>
 
             <!-- Desktop Buttons -->
@@ -30,7 +27,8 @@
 
                     <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 hidden" id="desktop-profile-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                         <span class="block font-bold px-4 py-2 text-base border-b-2 border-b-gray-600 text-gray-700 hover:bg-gray-100">{{auth()->user()->name}}</span>
-                        <a href="{{route('car.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Profile</a>
+                        <a href="{{route('car.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Cars</a>
                         <form action="{{route('logout')}}" method="POST">
                             @csrf
                         <button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</button>
@@ -68,9 +66,12 @@
                     </button>
                     <div id="tablet-profile-menu" class="hidden absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 z-50" role="menu" aria-orientation="vertical" aria-labelledby="tablet-profile-toggle" tabindex="-1">
                         <span class="block font-semibold px-4 py-2 text-sm border-b-2 border-b-gray-600 text-gray-700 hover:bg-gray-100">{{auth()->user()->name}}</span>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Profile</a>
+                        <a href="{{route('car.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Cars</a>
+                        <form action="{{route('logout')}}" method="POST">
+                            @csrf
+                        <button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</button>
+                        </form>
                     </div>
                 </div>
                 @endauth
@@ -97,24 +98,26 @@
 
                 <ul class="flex flex-col space-y-4 mt-4">
                     <li><a href="{{route('dashboard')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-house mr-2"></i>Home</a></li>
-                    <li><a href="#" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-list mr-2"></i>Listings</a></li>
-                    <li><a href="#" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-blog mr-2"></i>Blog</a></li>
-                    <li><a href="#" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-info-circle mr-2"></i>About</a></li>
-                    <li><a href="#" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-envelope mr-2"></i>Contact</a></li>
+                    <li><a href="{{route('listings')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-list mr-2"></i>Listings</a></li>
+                    <li><a href="{{route('brands')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-blog mr-2"></i>Blog</a></li>
+                    <li><a href="{{route('blog')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-info-circle mr-2"></i>About</a></li>
                 </ul>
 
                 <div class="mt-8 flex flex-col space-y-3">
                     <button class="mobile-btn"><a href="{{route('car.create')}}"><i class="fa-solid fa-circle-plus mr-2"></i> Add New Car</a></button>
 
                     @auth
-                    <button class="mobile-btn"><a href="#"><i class="fa-solid fa-user mr-2"></i>Your Profile</a></button>
-                    <button class="mobile-btn"><a href="#"><i class="fa-solid fa-gear mr-2"></i>Settings</a></button>
+                    <button class="mobile-btn"><a href="#"><i class="fa-solid fa-user mr-2"></i>My Profile</a></button>
+                    <button class="mobile-btn"><a href="{{route('car.index')}}"><i class="fa-solid fa-gear mr-2"></i>My Cars</a></button>
                     <button class="mobile-btn"><a href="#"><i class="fa-solid fa-sign-out-alt mr-2"></i>Sign out</a></button>
                     @endauth
 
                     @guest
                     <button class="mobile-btn"><a href="{{route('register')}}"><i class="fa-solid fa-user-plus mr-2"></i>Signup</a></button>
-                    <button class="mobile-btn"><a href="{{route('login')}}"><i class="fa-solid fa-right-to-bracket mr-2"></i>Login</a></button>
+                    <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                    <button class="mobile-btn" role="menuitem">Sign out</button>
+                    </form>
                     @endguest
                 </div>
             </div>

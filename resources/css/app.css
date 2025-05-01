@@ -51,9 +51,13 @@
     }
 
     .nav-design {
-        @apply text-[#050B20] font-medium hover:text-blue-600 transition duration-100;
+        @apply text-[#050B20] font-medium text-lg hover:text-orange-600 transition duration-100;
     }
     
+    .nav-design-active {
+        @apply text-orange-500 text-lg font-semibold transition duration-100;
+    }
+
     .add-new-car {
         @apply text-[#050B20] border-2 border-orange-500 py-2 px-4 rounded-full hover:bg-orange-500 hover:text-white transition duration-150;
     }
@@ -101,7 +105,7 @@
     }
 
     .brand-card{
-        @apply border border-gray-200 hover:border-gray-300 hover:drop-shadow-lg rounded-2xl shadow-lg text-center cursor-pointer flex flex-col items-center
+        @apply border bg-white border-gray-200 hover:border-gray-300 hover:drop-shadow-lg rounded-2xl shadow-lg text-center cursor-pointer flex flex-col items-center
     }
     .brand-card-image {
         @apply w-28 h-28 object-contain mx-auto;
