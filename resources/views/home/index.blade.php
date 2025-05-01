@@ -1,7 +1,7 @@
 <x-backend-layout title="Home">
     <main>
         {{-- Hero Section --}}
-        <section class="relative bg-white text-gray-900 py-20 px-12 md:px-24 lg:py-20 overflow-hidden">
+        <section class="relative bg-white text-gray-900 py-12 px-12 md:px-24 md:py-20 overflow-hidden">
             <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center">
                 <div class="lg:1/2 text-center lg:text-left">
                     <h3 class="text-lg font-light">Find cars for sale and rent near you</h3>
@@ -9,25 +9,18 @@
                         Available</h1>
                     <div class="mt-6 flex justify-center lg:justify-start gap-2">
                         <button
-                            class="text-white text-center font-semibold bg-blue-600 hover:bg-blue-700 py-3 px-12 rounded-lg shadow-md cursor-pointer flex items-center gap-2 transition-all">
-                            <a href="{{route('car.search')}}">Find Car <i class="fa-solid fa-arrow-up-right-from-square"></i></a></button>
+                            class="text-white text-center font-semibold bg-blue-600 hover:bg-blue-700 py-3 px-12 rounded-lg shadow-md cursor-pointer transition-all">
+                            <a href="{{route('car.search')}}">Find Car <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i></a></button>
                         <button
-                            class="text-sm lg:text-lg border border-gray-700 text-gray-900 w-50 cursor-pointer hover:bg-gray-100 font-semibold  py-3 px-6 rounded-md items-center transition-all">Contact
+                            class="text-sm lg:text-lg border border-gray-700 text-gray-900 w-50 cursor-pointer hover:bg-gray-100 font-semibold  py-3 px-6 rounded-md transition-all">Contact
                             Us <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
                     </div>
 
-                    <h3 class="text-medium font-semibold mt-8">or Browse Featured Model</h3>
-                    <ul class="flex justify-center lg:justify-start gap-3 mt-3 flex-wrap">
-                        <li class="car-type"><img src="{{ asset('assets/icons/SUV.svg') }}" alt="Icons"><a
-                                href="#">SUV</a></li>
-                        <li class="car-type"><img src="{{ asset('assets/icons/Sedan.svg') }}" alt="Icons"><a
-                                href="#">Sedan</a></li>
-                        <li class="car-type"><img src="{{ asset('assets/icons/Hatchback.svg') }}" alt="Icons"><a
-                                href="#">Hatchback</a></li>
-                        <li class="car-type"><img src="{{ asset('assets/icons/Coupe.svg') }}" alt="Icons"><a
-                                href="#">Coupe</a></li>
-                        <li class="car-type"><img src="{{ asset('assets/icons/Electric.svg') }}" alt="Icons"><a
-                                href="#">Electric</a></li>
+                    <h3 class="text-medium font-semibold mt-8">or Browse Featured Car Type</h3>
+                    <ul class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 flex-wrap">
+                        @foreach ($carTypes as $carType)
+                            <a href="{{route('car.search', ['carType' => $carType->name])}}" class="car-type"><img src="{{ asset('assets/icons/' . $carType->name . '.png') }}" alt="Icons">{{$carType->name}}</a>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="lg:w-1/2 lg:flex hidden justify-end items-center">
@@ -36,42 +29,23 @@
             </div>
         </section>
 
-        {{-- Explore Our Premium Brands Section --}}
-        <section class="py-12 px-12 md:p-x24 md:py-6    ">
+        {{-- Explore Our Premium Brands Section --}} 
+        <section class="py-12 px-12 md:p-x24 md:py-6">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row lg:flex-row items-center justify-between">
                 <h1 class="text-xl lg:text-4xl font-semibold">Explore Our Premium Brands</h1>
-                <p class="flex justify-center items-center font-light gap-2">Show all Brands <span><img
-                            src="{{ asset('assets/icons/upArrow.svg') }}" alt="Arrow"></p>
+                <a href="{{route('brands')}}" class="flex justify-center items-center font-light gap-2 hover:text-blue-500 duration-150 transition-all">Show all Brands <i class="fa-solid fa-arrow-up group-hover:text-blue-500 rotate-45"></i></a>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 py-8">
-                <div class="brand-card">
-                    <img class="brand-card-image" src="{{ asset('assets/car_brand/audi_logo.png') }}" alt="Audi Logo">
-                    <h3 class="brand-card-name">Audi</h3>
-                </div>
-                <div class="brand-card">
-                    <img class="brand-card-image" src="{{ asset('assets/car_brand/bmw_logo.png') }}" alt="BMW Logo">
-                    <h3 class="brand-card-name">BMW</h3>
-                </div>
-                <div class="brand-card">
-                    <img class="brand-card-image" src="{{ asset('assets/car_brand/ford_logo.png') }}" alt="Ford Logo">
-                    <h3 class="brand-card-name">Ford</h3>
-                </div>
-                <div class="brand-card">
-                    <img class="brand-card-image" src="{{ asset('assets/car_brand/mercedes_logo.png') }}"
-                        alt="Mesercedes Benz Logo">
-                    <h3 class="brand-card-name">Mercedes Benz</h3>
-                </div>
-                <div class="brand-card">
-                    <img class="brand-card-image" src="{{ asset('assets/car_brand/peugeot_logo.png') }}"
-                        alt="Peugeot Logo">
-                    <h3 class="brand-card-name">Peugeot</h3>
-                </div>
-                <div class="brand-card">
-                    <img class="brand-card-image" src="{{ asset('assets/car_brand/volkswagen_logo.png') }}"
-                        alt="Volkswagen Logo">
-                    <h3 class="brand-card-name">Volkswagen</h3>
-                </div>
+                @php
+                    $firstSixMaker = $makers->take(6);
+                @endphp
+                @foreach ($firstSixMaker as $maker)
+                    <a href="{{route('brands', ['maker'=> $maker->name])}}" class="brand-card w-50 mb-4">
+                        <img class="brand-card-image" src="{{ asset('assets/car_brand/'. $maker->name .'.png') }}" alt="Audi Logo">
+                        <h3 class="brand-card-name">{{$maker->name}}</h3>
+                    </a>
+                @endforeach
             </div>
         </section>
 
@@ -80,8 +54,7 @@
             <div>
                 <div class="max-w-7xl mx-auto flex flex-row items-center justify-between">
                     <h1 class="text-xl lg:text-4xl font-semibold">Featured Listings</h1>
-                    <p class="flex justify-center items-center font-light gap-2">Show all Brands <span><img
-                                src="{{ asset('assets/icons/upArrow.svg') }}" alt="Arrow"></span></p>
+                    <p class="flex justify-center items-center font-light gap-2 hover:text-blue-500 duration-150 transition-all cursor-pointer">Show all Listings <i class="fa-solid fa-arrow-up group-hover:text-blue-500 rotate-45"></i></p>
                 </div>
 
                 <ul class="mt-4 lg:ml-4 flex justify-center md:justify-start items-center gap-4 flex-wrap">

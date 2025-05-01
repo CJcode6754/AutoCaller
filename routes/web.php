@@ -6,6 +6,9 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/brands', [DashboardController::class, 'brands'])->name('brands');
+Route::get('/listings', [DashboardController::class, 'listings'])->name('listings');
+Route::get('/blog', [DashboardController::class, 'blog'])->name('blog');
 
 Route::middleware(['guest'])->group(function () {
 

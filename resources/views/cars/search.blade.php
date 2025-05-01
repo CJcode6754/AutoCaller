@@ -47,6 +47,16 @@
                         </select>
                     </div>
 
+                    {{-- Inventory Type --}}
+                    <div class="w-full max-w-sm mb-4">
+                        <label for="inventory_type" class="dropdown-label">Inventory Type</label>
+                        <select name="inventory_type" id="inventory_type" class="dropdown-select">
+                            <option value="">Any</option>
+                            <option value="used" {{ old('inventory_type', request()->input('inventory_type')) == 'used' ? 'selected' : '' }}>Used</option>
+                            <option value="new" {{ old('inventory_type', request()->input('inventory_type')) == 'new' ? 'selected' : '' }}>New</option>
+                        </select>
+                    </div>
+
                     {{-- Year --}}
                     <div class="mb-4">
                         <h2 class="label">Year</h2>

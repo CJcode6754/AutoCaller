@@ -243,8 +243,9 @@ class CarController extends Controller
         $mileage = $request->input('mileage');
         $regionID = $request->input('region_id');
         $cityID = $request->input('city_id');
+        $inventory_type = $request->input('inventory_type');
 
-        $cars = $query = Car::where('published_at', '<', now())
+        $query = Car::where('published_at', '<', now())
             ->with(['primaryImage', 'city', 'region','makers', 'models', 'fuelType', 'carType'])
             ->when($makerID, function ($query) use ($makerID) {
                 return $query->where('maker_id', $makerID);
@@ -302,10 +303,27 @@ class CarController extends Controller
                 } elseif ($mileage == 100001) {
                     return $query->where('mileage', '>=', 100001);
                 }
-            })            
-            ->orderBy('published_at','desc')
-            ->paginate(12)
-            ->appends($request->query());
+            })
+            ->when($inventory_type, function($query) use ($inventory_type){
+                if ($inventory_type === 'any') {
+                    return $query;
+                }elseif($inventory_type === 'used'){
+                    return $query->where('inventory_type', 'used');
+                }elseif($inventory_type === 'new'){
+                    return $query->where('inventory_type', 'new');
+                }
+            });
+            
+            if($request->has('carType')){
+                $carType = CarType::where('name', $request->carType)->first();
+
+                if($carType){
+                    $query->where('car_type_id', $carType->id);
+                }
+            }
+            $cars = $query->orderBy('published_at','desc')
+                ->paginate(12)
+                ->appends($request->query());
 
         return view("cars.search", compact('cars', 'makers', 'car_types', 'regions', 'fuel_types'));
     }
