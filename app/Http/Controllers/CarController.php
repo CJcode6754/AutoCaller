@@ -62,6 +62,7 @@ class CarController extends Controller
             'description' => ['nullable', 'string'],
             'publishDate' => ['date'],
             'images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,PNG', 'max:2048'],
+            'inventory_type' => ['required', 'in:Used,New']
         ]);
 
         
@@ -72,6 +73,7 @@ class CarController extends Controller
             'price' => $request->input('price'),
             'vin' => $request->input('vin'),
             'mileage' => $request->input('mileage'),
+            'inventory_type' => $request->input('inventory_type'),
             'car_type_id' => $request->input('car_type'),
             'fuel_type_id' => $request->input('fuel_type_id'),
             'user_id' => auth()->id(),

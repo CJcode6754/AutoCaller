@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $makers = Maker::all();
 
         $cars = Car::where('published_at', '<', now())
-            ->with(['primaryImage', 'city', 'makers', 'models', 'fuelType', 'carType'])
+            ->with(['primaryImage', 'region', 'city', 'makers', 'models', 'fuelType', 'carType'])
             ->orderBy('published_at', 'desc')
             ->paginate(8);
 

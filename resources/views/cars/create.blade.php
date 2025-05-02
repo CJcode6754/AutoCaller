@@ -5,7 +5,7 @@
             <form action="{{route('car.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- Dropdown Section --}}
-                <section class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                <section class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8">
                     {{-- Maker --}}
                     <div class="w-full max-w-sm">
                         <label for="makerDropdown" class="dropdown-label">Maker</label>
@@ -47,6 +47,20 @@
                                 <option class="max-h-10" value="{{$year}}">{{$year}}</option>
                               @endfor  
                         </select>
+                    </div>
+
+                    {{-- Inventory Type --}}
+                    <div class="w-full max-w-sm">
+                        <label for="inventory_type" class="dropdown-label">Inventory Type</label>
+                        <select id="inventory_type" name="inventory_type" class="dropdown-select @error('inventory_type') ring-red-400 @enderror"
+                            value="{{old('inventory_type')}}">
+                            <option value="">Select Inventory Type</option>
+                            <option value="Used">Used</option>
+                            <option value="New">New</option>
+                        </select>
+                        @error('inventory_type')
+                                <span class="text-xs text-red-400">{{$message}}</span>
+                        @enderror
                     </div>
                 </section>
 
