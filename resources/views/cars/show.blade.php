@@ -45,6 +45,7 @@
                     <div><strong>Mileage:</strong> {{ $car->mileage }}</div>
                     <div><strong>Car Type:</strong> {{ $car->carType->name }}</div>
                     <div><strong>Fuel Type:</strong> {{ $car->fuelType->name }}</div>
+                    <div><strong>Inventory Type:</strong> {{ $car->inventory_type }}</div>
                     <div class="col-span-2"><strong>Address:</strong> {{ $car->address }}</div>
                 </div>
                 <hr class="mb-4">

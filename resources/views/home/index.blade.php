@@ -4,8 +4,8 @@
         <section class="relative bg-white text-gray-900 py-12 px-12 md:px-24 md:py-20 overflow-hidden">
             <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center">
                 <div class="lg:1/2 text-center lg:text-left">
-                    <h3 class="text-lg font-light">Find cars for sale and rent near you</h3>
-                    <h1 class="text-7xl mt-5">5000+ Vehicles <br>
+                    <h3 class="text-lg font-medium">Find cars for sale and rent near you</h3>
+                    <h1 class="text-7xl py-4">5000+ Vehicles <br>
                         Available</h1>
                     <div class="mt-6 flex justify-center lg:justify-start gap-2">
                         <button
@@ -17,10 +17,14 @@
                     </div>
 
                     <h3 class="text-medium font-semibold mt-8">or Browse Featured Car Type</h3>
+                    @php
+                        $limitCarTypes = $carTypes->take(3);
+                    @endphp
                     <ul class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 flex-wrap">
-                        @foreach ($carTypes as $carType)
+                        @foreach ($limitCarTypes as $carType)
                             <a href="{{route('car.search', ['carType' => $carType->name])}}" class="car-type"><img src="{{ asset('assets/icons/' . $carType->name . '.png') }}" alt="Icons">{{$carType->name}}</a>
                         @endforeach
+                            <a href="{{route('car.search')}}" class="car-type">View All <i class="fa-solid fa-arrow-up rotate-45"></i></a>
                     </ul>
                 </div>
                 <div class="lg:w-1/2 lg:flex hidden justify-end items-center">

@@ -25,7 +25,7 @@
         </div>
         <div class="flex flex-col justify-center items-center gap-2">
             <img class="size-6" src="{{ asset('assets/icons/Gas.svg') }}" alt="Gas Icon">
-            <span>{{$car->FuelType->name}}</span>
+            <span>{{$car->fuelType->name}}</span>
         </div>
         <div class="flex flex-col justify-center items-center gap-2">
             <img class="size-6" src="{{ asset('assets/icons/typeOfCar.svg') }}" alt="Type of Car">
