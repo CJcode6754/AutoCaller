@@ -40,12 +40,12 @@
                 <a href="{{route('brands')}}" class="flex justify-center items-center font-light gap-2 hover:text-blue-500 duration-150 transition-all">Show all Brands <i class="fa-solid fa-arrow-up group-hover:text-blue-500 rotate-45"></i></a>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 py-8">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 py-8">
                 @php
                     $firstSixMaker = $makers->take(6);
                 @endphp
                 @foreach ($firstSixMaker as $maker)
-                    <a href="{{route('brands', ['maker'=> $maker->name])}}" class="brand-card w-50 mb-4">
+                    <a href="{{route('brands', ['maker'=> $maker->name])}}" class="brand-card w-35 md:w-50 mb-4">
                         <img class="brand-card-image" src="{{ asset('assets/car_brand/'. $maker->name .'.png') }}" alt="Audi Logo">
                         <h3 class="brand-card-name">{{$maker->name}}</h3>
                     </a>
@@ -61,10 +61,11 @@
                     <p class="flex justify-center items-center font-light gap-2 hover:text-blue-500 duration-150 transition-all cursor-pointer">Show all Listings <i class="fa-solid fa-arrow-up group-hover:text-blue-500 rotate-45"></i></p>
                 </div>
 
-                <ul class="mt-4 lg:ml-4 flex justify-center md:justify-start items-center gap-4 flex-wrap">
-                    <li class="car-featured">In Stock</li>
-                    <li class="car-featured">New Cars</li>
-                    <li class="car-featured">Used Cars</li>
+                <ul class="mt-4 lg:ml-4 flex justify-center md:justify-start items-center gap-8 flex-wrap">
+                    <form action="{{route('dashboard')}}" method="get">
+                        <a href="{{route('dashboard', ['inventory_type' => 'New'])}}" class="car-featured">New Cars</a>
+                        <a href="{{route('dashboard', ['inventory' => 'Used'])}}" class="car-featured">Used Cars</a>
+                    </form>
                 </ul>
                 <hr class="w-full mt-2 border border-gray-300 lg:ml-3">
 
