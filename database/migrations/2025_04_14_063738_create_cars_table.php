@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('price');
             $table->string('vin', 255);
             $table->integer('mileage');
-            $table->enum('inventory_type', ['new', 'used', 'instock']);
+            $table->enum('inventory_type', ['New', 'Used']);
             $table->foreignId('car_type_id')->constrained('car_types')->cascadeOnDelete();
             $table->foreignId('fuel_type_id')->constrained('fuel_types')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users');
