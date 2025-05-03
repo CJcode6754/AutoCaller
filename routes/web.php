@@ -3,12 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/brands', [DashboardController::class, 'brands'])->name('brands');
-Route::get('/listings', [DashboardController::class, 'listings'])->name('listings');
-Route::get('/blog', [DashboardController::class, 'blog'])->name('blog');
 
 Route::middleware(['guest'])->group(function () {
 
@@ -17,9 +13,34 @@ Route::middleware(['guest'])->group(function () {
 
     Route::view('/login', 'auth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+
+    //Reset Password Form
+    Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+
+    //Reset Password Submission
+    Route::post('/forgot-password', [ResetPasswordController::class, 'resetPassword']);
+
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passordFormReset'])->name('password.reset');
+
+    Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('verified');
+    Route::get('/brands', [DashboardController::class, 'brands'])->name('brands');
+    Route::get('/listings', [DashboardController::class, 'listings'])->name('listings');
+    Route::get('/blog', [DashboardController::class, 'blog'])->name('blog');
+
+    //Email Verification Notice
+    Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
+
+    //Email Verification Handler
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
+
+    //Resending the Verification Email
+    Route::post('/email/verification-notification', [AuthController::class, 'verifyNotif'])->middleware([ 'throttle:6,1'])->name('verification.send');
+    
+    //Logout Route
     Route::post('/logout', [DashboardController::class, 'logout'])->name('logout');
 
     Route::get('car/search', [CarController::class, 'search'])->name('car.search');

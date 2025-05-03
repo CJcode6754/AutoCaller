@@ -1,4 +1,48 @@
 <x-guest-layout title="Login" PageName="Login Page">
+
+    @if ($message = Session::get('status'))
+        <div 
+            x-data="{ show: true }" 
+            x-init="setTimeout(() => show = false, 5000)" 
+            x-show="show"
+            x-transition.opacity
+            class="fixed top-4 right-12 z-50"
+        >
+            <div class="max-w-sm w-[280px] bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+                <div class="p-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <!-- Success icon only -->
+                            <svg 
+                                class="h-6 w-6 text-green-500" 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <div class="ml-3 w-0 flex-1 pt-0.5">
+                            <p class="text-sm font-medium text-gray-900">
+                                Success
+                            </p>
+                            <p class="mt-1 text-sm text-gray-500">
+                                {{ $message }}
+                            </p>
+                        </div>
+                        <div class="ml-4 flex-shrink-0 flex">
+                            <button @click="show = false" class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none">
+                                <span class="sr-only">Close</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 8.586L4.707 3.293A1 1 0 103.293 4.707L8.586 10l-5.293 5.293a1 1 0 101.414 1.414L10 11.414l5.293 5.293a1 1 0 001.414-1.414L11.414 10l5.293-5.293a1 1 0 00-1.414-1.414L10 8.586z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <form action="{{route('login')}}" method="POST">
         @csrf
         <!-- Email -->
@@ -29,7 +73,7 @@
                 <label for="remember">Remember Me</label>
             </div>
             <div class="">
-                <a class="text-orange-500 text-right" href="">Reset Password</a>
+                <a class="text-orange-500 text-right" href="{{route('password.request')}}">Reset Password</a>
             </div>
         </div>
         @error('error')
