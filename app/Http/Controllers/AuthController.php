@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +29,8 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        event(new Registered($user));
+
         return redirect()->route('dashboard');
     }
 
@@ -45,5 +49,24 @@ class AuthController extends Controller
         }else{
             return back()->withErrors(['error'=> 'The provided credentials does not match our record']);
         }
+    }
+
+    //Email Verification Notice
+    public function verifyNotice(){
+        return view('auth.verify-email');
+    }
+
+    //Email Verification Handler
+    public function verifyEmail(EmailVerificationRequest $request){
+        $request->fulfill();
+
+        return redirect()->route('dashboard');
+    }
+
+    //Resending the Verification Email
+    public function verifyNotif(Request $request){
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
     }
 }
