@@ -58,7 +58,7 @@
             <div>
                 <div class="max-w-7xl mx-auto flex flex-row items-center justify-between">
                     <h1 class="text-xl lg:text-4xl font-semibold">Featured Listings</h1>
-                    <p class="flex justify-center items-center font-light gap-2 hover:text-blue-500 duration-150 transition-all cursor-pointer">Show all Listings <i class="fa-solid fa-arrow-up group-hover:text-blue-500 rotate-45"></i></p>
+                    <a href="{{route('listings')}}" class="flex justify-center items-center font-light gap-2 hover:text-blue-500 duration-150 transition-all cursor-pointer">Show all Listings <i class="fa-solid fa-arrow-up group-hover:text-blue-500 rotate-45"></i></a>
                 </div>
                 <hr class="w-full mt-2 border border-gray-300 lg:ml-3">
 
@@ -76,7 +76,6 @@
                             <x-featured-cars-card :$car/>
                         @endforeach
                     </div>
-                    {{ $cars->onEachSide(1)->links() }}
                 </section>
             </div>
         </section>
@@ -111,9 +110,9 @@
                             roadside</li>
                     </ul>
                     <div class="flex justify-center md:justify-start mt-4">
-                        <button
+                        <a href="{{route('login')}}"
                             class="text-white bg-blue-500 rounded-lg hover:bg-blue-600 py-3 px-4 w-40 cursor-pointer">Get
-                            started <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                            started <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
             </div>
@@ -139,22 +138,19 @@
                     </div>
                 </div>
                 <div class="flex flex-row items-center gap-4">
-                    <button class="btn-search">Search Cars <img class="mt-1"
-                            src="{{ asset('assets/icons/arrowWhite.svg') }}" alt="Arrow"></button>
-                    <button class="btn-search">Search Vans <img class="mt-1"
-                            src="{{ asset('assets/icons/arrowWhite.svg') }}" alt="Arrow"></button>
+                    <a href="{{route('car.search')}}" class="btn-search">Search Cars <img class="mt-1"
+                            src="{{ asset('assets/icons/arrowWhite.svg') }}" alt="Arrow"></a>
+                    <a href="{{route('car.search')}}" class="btn-search">Search Vans <img class="mt-1"
+                            src="{{ asset('assets/icons/arrowWhite.svg') }}" alt="Arrow"></a>
                 </div>
             </div>
 
             <div class="mx-6 md:mx-32 lg:mx-48 pb-12">
-                <h3 class="text-white font-meduim">Or browse by type:</h3>
-                <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 items-center gap-4 mt-4 flex-wrap">
-                    <li class="carType">Automatic Cars</li>
-                    <li class="carType">SUV's</li>
-                    <li class="carType">Electric Cars</li>
-                    <li class="carType">New in Stock</li>
-                    <li class="carType">Petrol</li>
-                    <li class="carType">Diesel</li>
+                <h3 class="text-white font-meduim">Or browse by fuel type:</h3>
+                <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 items-center gap-4 mt-4 flex-wrap">          
+                    @foreach ($fuelTypes as $fuelType)
+                        <a href="{{route('car.search', ['fuelType' => $fuelType->name])}}" class="carType">{{$fuelType->name}} Cars</a>
+                    @endforeach
                 </ul>
             </div>
         </section>
@@ -189,83 +185,27 @@
             </div>
         </section>
 
-        <section class="bg-gray-100 py-12 px-4 mx-8 md:px-8 lg:mx-24 rounded-xl drop-shadow-md">
+        <section class="bg-gray-100 py-12 px-4 mx-8 md:px-8 lg:mx-24 rounded-xl drop-shadow-md mb-8">
             <div class="flex flex-row items-center justify-between">
                 <h2 class="text-xl lg:text-3xl font-bold">What our costumers say</h2>
-                <p>Reviews</p>
+                <a href="{{route('blog')}}" class="text-base font-medium hover:text-blue-500 duration-150 transition">View All</a>
             </div>
             <div class="flex flex-col md:flex-row items-center justify-between mt-8 gap-4 lg:gap-8">
-                <div class="review-card p-8">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-medium">Great Work</h3>
-                        <img class="size-8" src="{{ asset('assets/icons/double.svg') }}" alt="Icon">
-                    </div>
-                    <p class="py-8 text-sm font-mono text-justify">“Amazing design, easy to customize and a design
-                        quality superlative account on its cloud platform for
-                        the optimized performance. And we didn’t on our
-                        original designs.”</p>
-                    <div class="flex items-center gap-2">
-                        <img class="size-12 rounded-full" src="{{ asset('assets/logo.jpg') }}" alt="">
-                        <div>
-                            <h3 class="font-medium text-base">Ceejay Ibabiosa</h3>
-                            <span class="text-sm font-light">Web Dev</span>
-                        </div>
-                    </div>
-                </div>
+                @php
+                    $limitBlogs = $blogs->take(3);
+                @endphp
+                @foreach ($limitBlogs as $blog)
+                    @php
+                        $truncated = Str::limit($blog->description, 100);
+                    @endphp
 
-                <div class="review-card p-8">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-medium">Great Work</h3>
-                        <img class="size-8" src"" src="{{ asset('assets/icons/double.svg') }}" alt="Icon">
-                    </div>
-                    <p class="py-8 text-sm font-mono text-justify">“Amazing design, easy to customize and a design
-                        quality superlative account on its cloud platform for
-                        the optimized performance. And we didn’t on our
-                        original designs.”</p>
-                    <div class="flex items-center gap-2">
-                        <img class="size-12 rounded-full" src="{{ asset('assets/logo.jpg') }}" alt="">
-                        <div>
-                            <h3 class="font-medium text-base">Ceejay Ibabiosa</h3>
-                            <span class="text-sm font-light">Web Dev</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="review-card p-8">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-medium">Great Work</h3>
-                        <img class="size-8" src"" src="{{ asset('assets/icons/double.svg') }}" alt="Icon">
-                    </div>
-                    <p class="py-8 text-sm font-mono text-justify">“Amazing design, easy to customize and a design
-                        quality superlative account on its cloud platform for
-                        the optimized performance. And we didn’t on our
-                        original designs.”</p>
-                    <div class="flex items-center gap-2">
-                        <img class="size-12 rounded-full" src="{{ asset('assets/logo.jpg') }}" alt="">
-                        <div>
-                            <h3 class="font-medium text-base">Ceejay Ibabiosa</h3>
-                            <span class="text-sm font-light">Web Dev</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center items-center mt-8 gap-2">
-                <button class="pagination">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button class="pagination-focus">
-                    1
-                </button>
-                <button class="pagination">
-                    2
-                </button>
-                <button class="pagination">
-                    3
-                </button>
-                <!-- Next Button -->
-                <button class="pagination">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
+                    <x-blog-component :blog="$blog">
+                        <x-slot:title>{{$blog->title}}</x-slot:title>
+                        {{$truncated}}
+                        <x-slot:user_name>{{$blog->user->name}}</x-slot:user_name>
+                        <x-slot:time>{{$blog->updated_at->diffForHumans()}}</x-slot:time>
+                    </x-blog-component>
+                @endforeach
             </div>
         </section>
 

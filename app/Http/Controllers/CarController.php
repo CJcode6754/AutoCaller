@@ -323,6 +323,15 @@ class CarController extends Controller
                     $query->where('car_type_id', $carType->id);
                 }
             }
+
+            if($request->has('fuelType')){
+                $fuelType = FuelType::where('name', $request->fuelType)->first();
+
+                if($fuelType){
+                    $query->where('fuel_type_id', $fuelType->id);
+                }
+            }
+            
             $cars = $query->orderBy('published_at','desc')
                 ->paginate(12)
                 ->appends($request->query());
