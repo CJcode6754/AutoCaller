@@ -1,12 +1,22 @@
 @props(['car', 'isfavorite' => false])
 <div class="featured-card relative">
     <a href="{{route('car.show', $car->id)}}"><img class="featured-card-image" src="{{ asset('storage/car_images/' . $car->primaryImage->image_path) }}" alt="Cars"></a>
+
+    <div>
+        @if ($car->inventory_type === 'New')
+            <h3 class="inventory-type-new">{{$car->inventory_type}}</h3>
+        @else
+            <h3 class="inventory-type-used">{{$car->inventory_type}}</h3>
+        @endif
+    </div>
+
     <div @class(['hidden' => $isfavorite])>
         <span class="bookmark-icon"><i class="fa-solid fa-heart"></i></span>
     </div>
     <div  @class(['hidden' => !$isfavorite])>
         <span class="bookmark-icon-red"><i class="fa-solid fa-heart"></i></span>
     </div>
+
     <div class="mx-6 flex flex-col justify-start items-center">
         <div>
             <h3 class="font-medium text-lg">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>
