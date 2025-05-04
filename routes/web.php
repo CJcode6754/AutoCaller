@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
@@ -46,7 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('car/search', [CarController::class, 'search'])->name('car.search');
     Route::get('car/watchlist', [CarController::class, 'watchlist'])->name('car.watchlist');
     Route::resource('car', CarController::class);
-
+    Route::resource('blogs', BlogController::class);
+    
     Route::get('/get-models/{maker}', [CarController::class, 'getModels']);
     Route::get('/get-cities/{region}', [CarController::class, 'getCities']);
 });
