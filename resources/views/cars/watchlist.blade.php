@@ -1,13 +1,11 @@
 <x-backend-layout title="Favorite Cars">
-    <section class="py-12 px-12 md:px-24 md:py-16">
+    <section class="py-12 px-12 md:px-24 md:py-8">
         <div>
             <div class="max-w-7xl mx-auto flex flex-row items-center justify-between">
-                <h1 class="text-xl lg:text-4xl font-semibold">My Favorite Cars</h1>
+                <h1 class="text-sm lg:text-4xl font-semibold">My Favorite Cars</h1>
                 <p class="flex justify-center items-center font-light gap-2">
                     @if ($cars->total() > 0)
-                        <span class="font-medium text-base">Showing {{$cars->firstItem()}} to {{$cars->lastItem()}} of {{$cars->total()}} cars.</span>
-                    @else
-                        
+                        <span class="font-light md:font-medium text-sm">Showing {{$cars->firstItem()}} to {{$cars->lastItem()}} of {{$cars->total()}} cars.</span>
                     @endif
                 </p>
             </div>
