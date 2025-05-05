@@ -7,6 +7,7 @@ use App\Models\CarType;
 use App\Models\FuelType;
 use App\Models\Maker;
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,6 +61,12 @@ class DashboardController extends Controller
 
         $blogs = Blog::with('user')->paginate(16);
         return view('home.blog', compact('blogs'));
+    }
+
+    public function viewProfile(){
+        $userInfo = User::with('cars')
+        ->where('id', auth()->id())->first();
+        return view('home.profile-page', compact('userInfo'));
     }
 
     public function logout(Request $request)

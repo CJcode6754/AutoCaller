@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('car/search', [CarController::class, 'search'])->name('car.search');
     Route::get('car/watchlist', [CarController::class, 'watchlist'])->name('car.watchlist');
+    Route::get('/profile', [DashboardController::class, 'viewProfile'])->name('profile');
+
     Route::resource('car', CarController::class);
     Route::resource('blogs', BlogController::class);
     
