@@ -19,9 +19,9 @@
 
     <div class="mx-6 flex flex-col justify-start items-center">
         <div>
-            <h3 class="font-medium text-lg">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>
+            <h3 class="font-medium text-base">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>
         </div>
-        <div class="flex justify-center items-center gap-4 pt-2">
+        <div class="flex justify-between items-center gap-18 pt-2">
             <p class="font-medium text-sm">{{$car->region->name}}</p>
             <p class="font-medium text-sm">{{Str::of($car->city->name)->limit(20)}}</p>
         </div>

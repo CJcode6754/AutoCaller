@@ -1,5 +1,5 @@
 @props(['car', 'isfavorite' => false])
-<div class="featured-card relative w-72">
+<div class="featured-card relative w-65">
     <a href="{{route('car.show', $car->id)}}"><img class="featured-card-image" src="{{ asset('storage/car_images/' . $car->primaryImage->image_path) }}" alt="Cars"></a>
 
     <div>
@@ -17,11 +17,11 @@
         <span class="bookmark-icon-red"><i class="fa-solid fa-heart"></i></span>
     </div>
     
-    <div class="mx-6">
+    <div class="mx-6 flex flex-col justify-start items-center">
         <div>
-            <h3 class="font-medium text-lg">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>
+            <h3 class="font-medium text-base">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>
         </div>
-        <div class="flex justify-evenly items-center gap-4 pt-2">
+        <div class="flex justify-between items-center gap-4 pt-2">
             <p class="font-medium text-sm">{{$car->region->name}}</p>
             <p class="font-medium text-sm">{{$car->city->name}}</p>
         </div>
