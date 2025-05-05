@@ -81,7 +81,7 @@ class BlogController extends Controller
             'description' => $request->input('description')
         ]);
 
-        return redirect()->route('blogs.index', $blog->id)->with('success', 'Successfully updated blog details.');
+        return redirect()->route('blogs.index')->with('success', 'Successfully updated blog details.');
     }
 
     /**
