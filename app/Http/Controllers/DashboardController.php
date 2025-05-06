@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $fuelTypes = FuelType::all();
         $makers = Maker::all();
         $blogs = Blog::with('user')->get();
-
+        
         $cars = Car::where('published_at', '<', now())
             ->with(['primaryImage', 'region', 'city', 'makers', 'models', 'fuelType', 'carType'])
             ->orderBy('published_at', 'desc')
@@ -61,12 +61,6 @@ class DashboardController extends Controller
 
         $blogs = Blog::with('user')->paginate(16);
         return view('home.blog', compact('blogs'));
-    }
-
-    public function viewProfile(){
-        $userInfo = User::with('cars')
-        ->where('id', auth()->id())->first();
-        return view('home.profile-page', compact('userInfo'));
     }
 
     public function logout(Request $request)
