@@ -47,7 +47,7 @@
         @endif
         <section class="bg-white shadow-lg rounded-b-lg mx-4 md:mx-16 lg:mx-60 px-4 md:px-6 py-6">
             <h1 class="text-2xl font-medium text-gray-500 mb-4">My Cars</h1>
-            <table>
+            <table class="table-auto">
                 <thead>
                     <tr>
                         <th>Image</th>

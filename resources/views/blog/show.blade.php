@@ -1,7 +1,7 @@
 <x-backend-layout title="Blog Details">
     <main>
         <section class="flex justify-center">
-            <div class="bg-white rounded-lg shadow-lg px-8 py-4 mx-24 my-12 w-5/6">
+            <div class="bg-white rounded-lg shadow-lg px-8 py-4 sm:mx-24 my-12 w-5/6">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl text-gray-600 font-semibold mb-4">Full Blog Details</h2>
                     <div class="flex gap-2">
