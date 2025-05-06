@@ -11,6 +11,7 @@ use App\Models\Models;
 use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CarController extends Controller
 {
@@ -119,9 +120,11 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Car $car)
+    public function show($id)
     {
-        return view("cars.show", compact("car"));
+        $car = Car::with(['primaryImage', 'makers', 'models', 'region', 'city', 'fuelType', 'carType'])->findOrFail($id);
+        
+        return view('cars.show', compact('car'));
     }
 
     /**
@@ -341,8 +344,9 @@ class CarController extends Controller
 
     public function watchlist()
     {
-        $cars = User::find(5)
-            ->favoriteCars()
+        $user = auth()->user();
+
+        $cars = $user->favoriteCars()
             ->with(['primaryImage', 'city', 'models', 'makers', 'carType', 'fuelType'])
             ->paginate(12);
         return view('cars.watchlist', compact('cars'));

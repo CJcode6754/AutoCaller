@@ -22,14 +22,17 @@
                 <div class="relative ml-3">
                     <button type="button" class="relative flex rounded-full bg-gray-400 text-sm focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1 focus:ring-offset-gray-600 cursor-pointer" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                         <span class="sr-only">Open user menu</span>
-                        <span class="flex items-center justify-center h-8 w-8"><i class="fa-solid fa-user"></i></span>
+                        @if (auth()->user()->profile_pic)
+                            <span class="flex items-center justify-center h-8 w-8"><img class="w-8 h-8 object-cover rounded-full" src="{{asset('storage/profile_images/' . auth()->user()->profile_pic)}}" alt="Profile"></span>
+                        @else
+                            <span class="flex items-center justify-center h-8 w-8"><i class="fa-solid fa-user"></i></span>
+                        @endif
                     </button>
 
                     <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 hidden" id="desktop-profile-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                         <span class="block font-bold px-4 py-2 text-base border-b-2 border-b-gray-600 text-gray-700 hover:bg-gray-100">{{auth()->user()->name}}</span>
-                        <a href="{{route('profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Profile</a>
+                        <a href="{{route('profile.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Profile</a>
                         <a href="{{route('car.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Cars</a>
-                        <a href="{{route('car.watchlist')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Wishlist</a>
                         <a href="{{route('blogs.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Blog</a>
                         <form action="{{route('logout')}}" method="POST">
                             @csrf
@@ -68,7 +71,8 @@
                     </button>
                     <div id="tablet-profile-menu" class="hidden absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 z-50" role="menu" aria-orientation="vertical" aria-labelledby="tablet-profile-toggle" tabindex="-1">
                         <span class="block font-semibold px-4 py-2 text-sm border-b-2 border-b-gray-600 text-gray-700 hover:bg-gray-100">{{auth()->user()->name}}</span>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Profile</a>
+                        <a href="{{route('profile.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Profile</a>
+                        <a href="{{route('car.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Cars</a>
                         <a href="{{route('car.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Cars</a>
                         <form action="{{route('logout')}}" method="POST">
                             @csrf
@@ -109,8 +113,9 @@
                     <button class="mobile-btn"><a href="{{route('car.create')}}"><i class="fa-solid fa-circle-plus mr-2"></i> Add New Car</a></button>
 
                     @auth
-                    <button class="mobile-btn"><a href="#"><i class="fa-solid fa-user mr-2"></i>My Profile</a></button>
+                    <button class="mobile-btn"><a href="{{route('profile.index')}}"><i class="fa-solid fa-user mr-2"></i>My Profile</a></button>
                     <button class="mobile-btn"><a href="{{route('car.index')}}"><i class="fa-solid fa-gear mr-2"></i>My Cars</a></button>
+                    <button class="mobile-btn"><a href="{{route('blogs.index')}}"><i class="fa-solid fa-gear mr-2"></i>My Blog</a></button>
                     <button class="mobile-btn"><a href="#"><i class="fa-solid fa-sign-out-alt mr-2"></i>Sign out</a></button>
                     @endauth
 

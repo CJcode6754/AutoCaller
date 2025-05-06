@@ -9,13 +9,6 @@
             <h3 class="inventory-type-used">{{$car->inventory_type}}</h3>
         @endif
     </div>
-
-    <div @class(['hidden' => $isfavorite])>
-        <span class="bookmark-icon"><i class="fa-solid fa-heart"></i></span>
-    </div>
-    <div  @class(['hidden' => !$isfavorite])>
-        <span class="bookmark-icon-red"><i class="fa-solid fa-heart"></i></span>
-    </div>
     
     <div class="mx-6 flex flex-col justify-start items-center">
         <div>

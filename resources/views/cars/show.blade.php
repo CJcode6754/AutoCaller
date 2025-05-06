@@ -33,7 +33,6 @@
             <div class="bg-white rounded-lg shadow p-6 w-full lg:w-1/3">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-semibold text-gray-600">{{ $car->price }}</h2>
-                    <i class="fa-regular fa-heart text-orange-400 text-lg"></i>
                 </div>
                 <hr class="mb-4">
     
@@ -58,11 +57,16 @@
                     </div>
                 </div>
     
-                <div class="flex items-center gap-3 border-2 border-orange-500 py-2 px-4 rounded-lg cursor-pointer group hover:bg-orange-500 hover:text-white transition">
+                <div 
+                    x-data="{ show: false }" 
+                    @click="show = !show"
+                    class="flex items-center gap-3 border-2 border-orange-500 py-2 px-4 rounded-lg cursor-pointer group hover:bg-orange-500 hover:text-white transition"
+                >
                     <i class="fa-solid fa-phone text-orange-500 group-hover:text-white"></i>
-                    <h2>{{ Str::mask($car->phone, '*', -4) }}</h2>
-                    <h2 class="ml-auto text-sm font-medium">View Full Number</h2>
+                    <h2 x-text="show ? '{{ $car->phone }}' : '{{ Str::mask($car->phone, '*', -4) }}'"></h2>
+                    <h2 class="ml-auto text-sm font-medium" x-text="show ? 'Hide Number' : 'View Full Number'"></h2>
                 </div>
+
             </div>
         </section>
     

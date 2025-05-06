@@ -10,13 +10,6 @@
         @endif
     </div>
 
-    <div @class(['hidden' => $isfavorite])>
-        <span class="bookmark-icon"><i class="fa-solid fa-heart"></i></span>
-    </div>
-    <div  @class(['hidden' => !$isfavorite])>
-        <span class="bookmark-icon-red"><i class="fa-solid fa-heart"></i></span>
-    </div>
-
     <div class="mx-6 flex flex-col justify-start items-center">
         <div>
             <h3 class="font-medium text-base">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>

@@ -9,11 +9,8 @@
                         Available</h1>
                     <div class="mt-6 flex justify-center lg:justify-start gap-2">
                         <button
-                            class="text-white text-center font-semibold bg-blue-600 hover:bg-blue-700 py-3 px-12 rounded-lg shadow-md cursor-pointer transition-all">
+                            class="text-white text-center font-semibold bg-blue-600 hover:bg-blue-700 py-3 px-16 rounded-lg shadow-md cursor-pointer transition-all">
                             <a href="{{route('car.search')}}">Find Car <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i></a></button>
-                        <button
-                            class="text-sm lg:text-lg border border-gray-700 text-gray-900 w-50 cursor-pointer hover:bg-gray-100 font-semibold  py-3 px-6 rounded-md transition-all">Contact
-                            Us <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
                     </div>
 
                     <h3 class="text-medium font-semibold mt-8">or Browse Featured Car Type</h3>
@@ -133,7 +130,7 @@
                         <h1 class="text-xl lg:text-3xl font-semibold text-white mb-2">Search over 150,000 vehicles</h1>
                         <p class="text-white text-xs font-light">Choose from thousands of trusted used cars and vans
                             across the
-                            UK,<br class="hidden md:block">
+                            Philippines,<br class="hidden md:block">
                             from our national network of vetted dealers.</p>
                     </div>
                 </div>

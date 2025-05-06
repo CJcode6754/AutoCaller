@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -45,8 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [DashboardController::class, 'logout'])->name('logout');
 
     Route::get('car/search', [CarController::class, 'search'])->name('car.search');
-    Route::get('car/watchlist', [CarController::class, 'watchlist'])->name('car.watchlist');
-    Route::get('/profile', [DashboardController::class, 'viewProfile'])->name('profile');
+    
+    Route::resource('profile', ProfileController::class);
 
     Route::resource('car', CarController::class);
     Route::resource('blogs', BlogController::class);
