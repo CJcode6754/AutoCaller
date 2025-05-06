@@ -3,7 +3,10 @@
         <div class="flex justify-between items-center">
             <!-- Logo and Nav Links -->
             <div class="flex items-center space-x-4 lg:space-x-12">
-                <h2 class="text-2xl font-bold text-[#050B20]">Cars</h2>
+                <div class="flex items-center gap-2">
+                    <img class="w-12 h-12 object-cover" src="{{asset('assets/logo.png')}}" alt="Logo">
+                    <h2 class="text-xl font-bold text-[#050B20]">AutoCaller</h2>
+                </div>
                 <!-- Desktop Navigation -->
                 <x-nav-link href="{{route('dashboard')}}" :active="request()->is('/')">Home</x-nav-link>
                 <x-nav-link href="{{route('listings')}}" :active="request()->is('listings')">Listings</x-nav-link>
@@ -67,7 +70,7 @@
                 <!-- Tablet Profile Dropdown -->
                 <div class="relative">
                     <button id="tablet-profile-toggle" class="icon-btn profile-icon" aria-expanded="false" aria-haspopup="true">
-                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User Profile" />
+                        <img class="h-8 w-8 rounded-full" src="{{asset('storage/profile_images/' . auth()->user()->profile_pic)}}" alt="User Profile" />
                     </button>
                     <div id="tablet-profile-menu" class="hidden absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 z-50" role="menu" aria-orientation="vertical" aria-labelledby="tablet-profile-toggle" tabindex="-1">
                         <span class="block font-semibold px-4 py-2 text-sm border-b-2 border-b-gray-600 text-gray-700 hover:bg-gray-100">{{auth()->user()->name}}</span>
@@ -105,8 +108,8 @@
                 <ul class="flex flex-col space-y-4 mt-4">
                     <li><a href="{{route('dashboard')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-house mr-2"></i>Home</a></li>
                     <li><a href="{{route('listings')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-list mr-2"></i>Listings</a></li>
-                    <li><a href="{{route('brands')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-blog mr-2"></i>Blog</a></li>
-                    <li><a href="{{route('blog')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-info-circle mr-2"></i>About</a></li>
+                    <li><a href="{{route('brands')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-copyright mr-2"></i>Brands</a></li>
+                    <li><a href="{{route('blog')}}" class="block text-[#050B20] font-medium py-2"><i class="fa-solid fa-blog mr-2"></i>Blogs</a></li>
                 </ul>
 
                 <div class="mt-8 flex flex-col space-y-3">
@@ -114,8 +117,8 @@
 
                     @auth
                     <button class="mobile-btn"><a href="{{route('profile.index')}}"><i class="fa-solid fa-user mr-2"></i>My Profile</a></button>
-                    <button class="mobile-btn"><a href="{{route('car.index')}}"><i class="fa-solid fa-gear mr-2"></i>My Cars</a></button>
-                    <button class="mobile-btn"><a href="{{route('blogs.index')}}"><i class="fa-solid fa-gear mr-2"></i>My Blog</a></button>
+                    <button class="mobile-btn"><a href="{{route('car.index')}}"><i class="fa-solid fa-car mr-2"></i>My Cars</a></button>
+                    <button class="mobile-btn"><a href="{{route('blogs.index')}}"><i class="fa-solid fa-blog mr-2"></i>My Blog</a></button>
                     <button class="mobile-btn"><a href="#"><i class="fa-solid fa-sign-out-alt mr-2"></i>Sign out</a></button>
                     @endauth
 
