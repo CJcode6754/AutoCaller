@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yourusername/autocaller"><img src="https://img.shields.io/github/license/yourusername/autocaller" alt="License"></a>
-  <a href="https://github.com/yourusername/autocaller"><img src="https://img.shields.io/github/stars/yourusername/autocaller" alt="GitHub Stars"></a>
-  <a href="https://github.com/yourusername/autocaller/issues"><img src="https://img.shields.io/github/issues/yourusername/autocaller" alt="Issues"></a>
+  <a href="https://github.com/CJcode6754/CarShop"><img src="https://img.shields.io/github/license/CJcode6754/CarShop" alt="License"></a>
+  <a href="https://github.com/CJcode6754/CarShop"><img src="https://img.shields.io/github/stars/CJcode6754/CarShop" alt="GitHub Stars"></a>
+  <a href="https://github.com/CJcode6754/CarShop/issues"><img src="https://img.shields.io/github/issues/CJcode6754/CarShop" alt="Issues"></a>
 </p>
 
 ---
@@ -44,11 +44,13 @@ Follow these steps to set up the project locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/autocaller.git
+git clone https://github.com/CJcode6754/CarShop.git
 cd autocaller
+
 
 # Install PHP dependencies
 composer install
+
 
 # Install Node.js dependencies
 npm install
