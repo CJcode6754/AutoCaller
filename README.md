@@ -34,7 +34,7 @@ Whether you're a personal seller or a car dealer, AutoCaller helps you connect w
 - **Backend:** Laravel (PHP)
 - **Frontend:** Blade, Tailwind CSS, AlpineJS, JavaScript
 - **Database:** MySQL
-- **Dev Tools:** Laravel Artisan, Composer, NPM, Vite
+- **Dev Tools:** Laravel Artisan, Composer, NPM
 
 ---
 
