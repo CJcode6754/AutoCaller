@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
 
-    Route::view('/register','auth.register')->name('register');
+    Route::view('/register', 'auth.register')->name('register');
     Route::post('/register', [AuthController::class, 'register']);
 
     Route::view('/login', 'auth.login')->name('login');
@@ -28,12 +28,18 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 
-    /**
-     * Google Login
-     */
     Route::controller(SocialiteController::class)->group(function () {
-        Route::get('auth/google','googleLogin')->name('auth.google');
-        Route::get('auth/google-callback','googleAuthentication')->name('auth.google-callback');
+        /**
+         * Google Login
+         */
+        Route::get('auth/google', 'googleLogin')->name('auth.google');
+        Route::get('auth/google-callback', 'googleAuthentication')->name('auth.google-callback');
+
+        /**
+         * Facebook Login
+         */
+        Route::get('auth/facebook', 'facebookLogin')->name('auth.facebook');
+        Route::get('auth/facebook-callback', 'facebookAuthentication')->name('auth.facebook-callback');
     });
 });
 
@@ -50,18 +56,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
 
     //Resending the Verification Email
-    Route::post('/email/verification-notification', [AuthController::class, 'verifyNotif'])->middleware([ 'throttle:6,1'])->name('verification.send');
-    
+    Route::post('/email/verification-notification', [AuthController::class, 'verifyNotif'])->middleware(['throttle:6,1'])->name('verification.send');
+
     //Logout Route
     Route::post('/logout', [DashboardController::class, 'logout'])->name('logout');
 
     Route::get('car/search', [CarController::class, 'search'])->name('car.search');
-    
+
     Route::resource('profile', ProfileController::class);
 
     Route::resource('car', CarController::class);
     Route::resource('blogs', BlogController::class);
-    
+
     Route::get('/get-models/{maker}', [CarController::class, 'getModels']);
     Route::get('/get-cities/{region}', [CarController::class, 'getCities']);
 });
