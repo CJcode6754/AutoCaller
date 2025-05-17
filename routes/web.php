@@ -6,6 +6,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,14 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passordFormReset'])->name('password.reset');
 
     Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
+
+    /**
+     * Google Login
+     */
+    Route::controller(SocialiteController::class)->group(function () {
+        Route::get('auth/google','googleLogin')->name('auth.google');
+        Route::get('auth/google-callback','googleAuthentication')->name('auth.google-callback');
+    });
 });
 
 Route::middleware(['auth'])->group(function () {
