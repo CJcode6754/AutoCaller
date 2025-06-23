@@ -44,7 +44,7 @@ Follow these steps to set up the project locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/CJcode6754/CarShop.git
+git clone https://github.com/CJcode6754/AutoCaller.git
 cd autocaller
 
 
