@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SocialiteController;
@@ -11,7 +12,7 @@ use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
-
+    Route::get('/', [HomeController::class, 'index']);
     Route::view('/register', 'auth.register')->name('register');
     Route::post('/register', [AuthController::class, 'register']);
 
@@ -44,7 +45,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('verified');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('verified');
     Route::get('/brands', [DashboardController::class, 'brands'])->name('brands');
     Route::get('/listings', [DashboardController::class, 'listings'])->name('listings');
     Route::get('/blog', [DashboardController::class, 'blog'])->name('blog');
