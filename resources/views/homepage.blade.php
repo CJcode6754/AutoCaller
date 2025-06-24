@@ -37,7 +37,7 @@
                 <a href="{{route('brands')}}" class="flex justify-center items-center font-light gap-2 hover:text-blue-500 duration-150 transition-all">Show all Brands <i class="fa-solid fa-arrow-up group-hover:text-blue-500 rotate-45"></i></a>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 py-8">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 py-8">
                 @php
                     $firstSixMaker = $makers->take(6);
                 @endphp
@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         @foreach ($cars as $car)
                             <x-featured-cars-card :$car/>
                         @endforeach
