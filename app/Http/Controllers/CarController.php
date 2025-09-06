@@ -12,6 +12,7 @@ use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -20,12 +21,12 @@ class CarController extends Controller
      */
     public function index()
     {
-        $userId = auth()->id();
+        $userId = Auth::id();
 
         $cars = Car::where('user_id', $userId)
-        ->with(['primaryImage', 'makers', 'models'])
-        ->orderBy("created_at","desc")
-        ->paginate(15);
+            ->with(['primaryImage', 'makers', 'models'])
+            ->orderBy("created_at", "desc")
+            ->paginate(15);
     
         return view("cars.index", compact("cars"));
     }
@@ -39,7 +40,7 @@ class CarController extends Controller
         $regions = Region::all();
         $car_types = CarType::all();
         $fuel_types = FuelType::all();
-        return view("cars.create", compact("makers","regions", 'car_types', 'fuel_types'));
+        return view("cars.create", compact("makers", "regions", 'car_types', 'fuel_types'));
     }
 
     /**
@@ -48,17 +49,17 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'maker_id' => ['required','exists:makers,id'],
-            'model_id' => ['required','exists:models,id'],
-            'year' => ['required','integer'],
-            'car_type' => ['required','exists:car_types,id'],
-            'fuel_type_id' => ['required','exists:fuel_types,id'],
-            'region_id' => ['required','exists:regions,id'],
-            'city_id' => ['required','exists:cities,id'],
-            'price' => ['required','integer'],
-            'vin' => ['required','integer'],
-            'mileage' => ['required','integer'],
-            'address' => ['required','string', 'max:255'],
+            'maker_id' => ['required', 'exists:makers,id'],
+            'model_id' => ['required', 'exists:models,id'],
+            'year' => ['required', 'integer'],
+            'car_type' => ['required', 'exists:car_types,id'],
+            'fuel_type_id' => ['required', 'exists:fuel_types,id'],
+            'region_id' => ['required', 'exists:regions,id'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'price' => ['required', 'integer'],
+            'vin' => ['required', 'integer'],
+            'mileage' => ['required', 'integer'],
+            'address' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'regex:/^09\d{9}$/'],
             'description' => ['nullable', 'string'],
             'publishDate' => ['date'],
@@ -66,7 +67,6 @@ class CarController extends Controller
             'inventory_type' => ['required', 'in:Used,New']
         ]);
 
-        
         $car = Car::create([
             'maker_id' => $request->input('maker_id'),
             'model_id' => $request->input('model_id'),
@@ -77,7 +77,7 @@ class CarController extends Controller
             'inventory_type' => $request->input('inventory_type'),
             'car_type_id' => $request->input('car_type'),
             'fuel_type_id' => $request->input('fuel_type_id'),
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'region_id' => $request->input('region_id'),
             'city_id' => $request->input('city_id'),
             'address' => $request->input('address'),
@@ -103,16 +103,15 @@ class CarController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('car_images', 'public'); // Still stores in car_images/
-                $filename = basename($path); // This gives just the filename part
+                $path = $image->store('car_images', 'public');
+                $filename = basename($path);
         
                 $car->images()->create([
-                    'image_path' => $filename, // Now stores only the filename
+                    'image_path' => $filename,
                     'position' => $index + 1,
                 ]);
             }
         }
-        
 
         return redirect()->route('car.index')->with('success', 'Car added successfully!');
     }
@@ -122,7 +121,8 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        $car = Car::with(['primaryImage', 'makers', 'models', 'region', 'city', 'fuelType', 'carType'])->findOrFail($id);
+        $car = Car::with(['primaryImage', 'makers', 'models', 'region', 'city', 'fuelType', 'carType'])
+            ->findOrFail($id);
         
         return view('cars.show', compact('car'));
     }
@@ -136,7 +136,7 @@ class CarController extends Controller
         $regions = Region::all();
         $car_types = CarType::all();
         $fuel_types = FuelType::all();
-        return view("cars.edit", compact('car','makers','regions', 'car_types', 'fuel_types'));
+        return view("cars.edit", compact('car', 'makers', 'regions', 'car_types', 'fuel_types'));
     }
 
     /**
@@ -145,24 +145,23 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $request->validate([
-            'maker_id' => ['required','exists:makers,id'],
-            'model_id' => ['required','exists:models,id'],
-            'year' => ['required','integer'],
-            'car_type' => ['required','exists:car_types,id'],
-            'fuel_type_id' => ['required','exists:fuel_types,id'],
-            'region_id' => ['required','exists:regions,id'],
-            'city_id' => ['required','exists:cities,id'],
-            'price' => ['required','integer'],
-            'vin' => ['required','integer'],
-            'mileage' => ['required','integer'],
-            'address' => ['required','string', 'max:255'],
+            'maker_id' => ['required', 'exists:makers,id'],
+            'model_id' => ['required', 'exists:models,id'],
+            'year' => ['required', 'integer'],
+            'car_type' => ['required', 'exists:car_types,id'],
+            'fuel_type_id' => ['required', 'exists:fuel_types,id'],
+            'region_id' => ['required', 'exists:regions,id'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'price' => ['required', 'integer'],
+            'vin' => ['required', 'integer'],
+            'mileage' => ['required', 'integer'],
+            'address' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'regex:/^09\d{9}$/'],
             'description' => ['nullable', 'string'],
             'publishDate' => ['date'],
             'images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,PNG', 'max:2048'],
         ]);
 
-        
         $car->update([
             'maker_id' => $request->input('maker_id'),
             'model_id' => $request->input('model_id'),
@@ -172,7 +171,7 @@ class CarController extends Controller
             'mileage' => $request->input('mileage'),
             'car_type_id' => $request->input('car_type'),
             'fuel_type_id' => $request->input('fuel_type_id'),
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'region_id' => $request->input('region_id'),
             'city_id' => $request->input('city_id'),
             'address' => $request->input('address'),
@@ -197,25 +196,20 @@ class CarController extends Controller
         ]);
 
         if ($request->hasFile('images')) {
-            foreach ($car->images as $image) {
-                $oldPath = storage_path('app/public/car_images/' . $image->image_path);
-                if (file_exists($oldPath)) {
-                    unlink($oldPath);
-                }
-                $image->delete(); // remove from DB
-            }
-
+            // Get the maximum position from existing images
+            $maxPosition = $car->images()->max('position') ?? 0;
+            
+            // Add new images
             foreach ($request->file('images') as $index => $image) {
                 $path = $image->store('car_images', 'public');
                 $filename = basename($path);
         
                 $car->images()->create([
-                    'image_path' => $filename, // Now stores only the filename
-                    'position' => $index + 1,
+                    'image_path' => $filename,
+                    'position' => $maxPosition + $index + 1,
                 ]);
             }
         }
-        
 
         return redirect()->route('car.index')->with('success', 'Car updated successfully!');
     }
@@ -226,7 +220,6 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         $car->delete();
-
         return redirect()->route('car.index')->with('success', 'Car deleted successfully');
     }
 
@@ -237,6 +230,7 @@ class CarController extends Controller
         $car_types = CarType::all();
         $regions = Region::all();
         $fuel_types = FuelType::all();
+        
         $makerID = $request->input('maker_id');
         $modelID = $request->input('model_id');
         $car_type = $request->input('car_type');
@@ -251,35 +245,35 @@ class CarController extends Controller
         $inventory_type = $request->input('inventory_type');
 
         $query = Car::where('published_at', '<', now())
-            ->with(['primaryImage', 'city', 'region','makers', 'models', 'fuelType', 'carType'])
+            ->with(['primaryImage', 'city', 'region', 'makers', 'models', 'fuelType', 'carType'])
             ->when($makerID, function ($query) use ($makerID) {
                 return $query->where('maker_id', $makerID);
             })
-            ->when($modelID, function($query) use ($modelID) {
+            ->when($modelID, function ($query) use ($modelID) {
                 return $query->where('model_id', $modelID);
             })
-            ->when($car_type, function($query) use ($car_type) {
+            ->when($car_type, function ($query) use ($car_type) {
                 return $query->where('car_type_id', $car_type);
             })
-            ->when($fuel_type, function($query) use ($fuel_type) {
+            ->when($fuel_type, function ($query) use ($fuel_type) {
                 return $query->where('fuel_type_id', $fuel_type);
             })
-            ->when($yearFrom, function($query) use ($yearFrom){
+            ->when($yearFrom, function ($query) use ($yearFrom) {
                 return $query->where('year', '>=', $yearFrom);
             })
-            ->when($yearTo, function($query) use ($yearTo){
+            ->when($yearTo, function ($query) use ($yearTo) {
                 return $query->where('year', '<=', $yearTo);
             })
-            ->when($priceFrom, function($query) use ($priceFrom){
+            ->when($priceFrom, function ($query) use ($priceFrom) {
                 return $query->where('price', '>=', $priceFrom);
             })
-            ->when($priceTo, function($query) use ($priceTo){
+            ->when($priceTo, function ($query) use ($priceTo) {
                 return $query->where('price', '<=', $priceTo);
             })            
-            ->when($regionID, function($query) use ($regionID) {
+            ->when($regionID, function ($query) use ($regionID) {
                 return $query->where('region_id', $regionID);
             })
-            ->when($cityID, function($query) use ($cityID) {
+            ->when($cityID, function ($query) use ($cityID) {
                 return $query->where('city_id', $cityID);
             })
             ->when($mileage, function ($query) use ($mileage) {
@@ -309,44 +303,40 @@ class CarController extends Controller
                     return $query->where('mileage', '>=', 100001);
                 }
             })
-            ->when($inventory_type, function($query) use ($inventory_type){
+            ->when($inventory_type, function ($query) use ($inventory_type) {
                 if ($inventory_type === 'any') {
                     return $query;
-                }elseif($inventory_type === 'used'){
-                    return $query->where('inventory_type', 'used');
-                }elseif($inventory_type === 'new'){
-                    return $query->where('inventory_type', 'new');
+                } elseif ($inventory_type === 'used') {
+                    return $query->where('inventory_type', 'Used');
+                } elseif ($inventory_type === 'new') {
+                    return $query->where('inventory_type', 'New');
                 }
             });
             
-            if($request->has('carType')){
-                $carType = CarType::where('name', $request->carType)->first();
-
-                if($carType){
-                    $query->where('car_type_id', $carType->id);
-                }
+        if ($request->has('carType')) {
+            $carType = CarType::where('name', $request->carType)->first();
+            if ($carType) {
+                $query->where('car_type_id', $carType->id);
             }
+        }
 
-            if($request->has('fuelType')){
-                $fuelType = FuelType::where('name', $request->fuelType)->first();
-
-                if($fuelType){
-                    $query->where('fuel_type_id', $fuelType->id);
-                }
+        if ($request->has('fuelType')) {
+            $fuelType = FuelType::where('name', $request->fuelType)->first();
+            if ($fuelType) {
+                $query->where('fuel_type_id', $fuelType->id);
             }
+        }
             
-            $cars = $query->orderBy('published_at','desc')
-                ->paginate(12)
-                ->appends($request->query());
+        $cars = $query->orderBy('published_at', 'desc')
+            ->paginate(12)
+            ->appends($request->query());
 
         return view("cars.search", compact('cars', 'makers', 'car_types', 'regions', 'fuel_types'));
     }
 
     public function watchlist()
     {
-        $user = auth()->user();
-
-        $cars = $user->favoriteCars()
+        $cars = Auth::user()->favoriteCars()
             ->with(['primaryImage', 'city', 'models', 'makers', 'carType', 'fuelType'])
             ->paginate(12);
         return view('cars.watchlist', compact('cars'));

@@ -1,6 +1,12 @@
 @props(['car', 'isfavorite' => false])
 <div class="featured-card relative">
-    <a href="{{route('car.show', $car->id)}}"><img class="featured-card-image" src="{{ asset('storage/car_images/' . $car->primaryImage->image_path) }}" alt="Cars"></a>
+    <a href="{{route('car.show', $car->id)}}">
+        <img class="featured-card-image" 
+             src="{{ $car->primaryImage && Storage::disk('public')->exists('car_images/' . $car->primaryImage->image_path) 
+                  ? asset('storage/car_images/' . $car->primaryImage->image_path) 
+                  : asset('assets/hero.png') }}" 
+             alt="{{ $car->year }} {{ $car->makers->name }} {{ $car->models->name }}">
+    </a>
 
     <div>
         @if ($car->inventory_type === 'New')
@@ -14,7 +20,7 @@
         <div>
             <h3 class="font-medium text-base">{{$car->year}} - {{$car->makers->name}} - {{$car->models->name}}</h3>
         </div>
-        <div class="flex justify-between items-center gap-18 pt-2">
+        <div class="items-start pt-2">
             <p class="font-medium text-sm">{{$car->region->name}}</p>
             <p class="font-medium text-sm">{{Str::of($car->city->name)->limit(20)}}</p>
         </div>

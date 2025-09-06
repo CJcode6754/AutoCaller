@@ -270,6 +270,51 @@
     </main>
 
     <script>
+        // Image Preview Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('carFormImageUpload');
+            const previewArea = document.getElementById('imagePreviewArea');
+            const previewGrid = document.getElementById('imagePreviewGrid');
+
+            imageInput.addEventListener('change', function() {
+                previewGrid.innerHTML = ''; // Clear existing previews
+                
+                if (this.files.length > 0) {
+                    previewArea.classList.remove('hidden');
+                    
+                    Array.from(this.files).forEach((file, index) => {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            const previewContainer = document.createElement('div');
+                            previewContainer.className = 'relative group';
+                            
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.className = 'w-full h-50 object-contain rounded-lg';
+                            img.alt = `Preview ${index + 1}`;
+                            
+                            const overlay = document.createElement('div');
+                            overlay.className = 'absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center';
+                            
+                            const position = document.createElement('span');
+                            position.className = 'text-white text-sm';
+                            position.textContent = `Position: ${index + 1}`;
+                            
+                            overlay.appendChild(position);
+                            previewContainer.appendChild(img);
+                            previewContainer.appendChild(overlay);
+                            previewGrid.appendChild(previewContainer);
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    });
+                } else {
+                    previewArea.classList.add('hidden');
+                }
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const makerDropdown = document.getElementById('makerDropdown');
             const modelDropdown = document.getElementById('modelDropdown');
